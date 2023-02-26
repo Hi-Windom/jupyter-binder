@@ -15,7 +15,9 @@
 
 ## 在 [Binder (mybinder.org)](https://mybinder.org/) 使用
 
-任意 ipynb 公开仓库可 [在线生成链接](https://hub.jupyter.org/nbgitpuller/link?tab=binder) ，而无需提供额外配置
+直接使用：直接打开链接 [开始](https://mybinder.org/v2/gh/Hi-Windom/jupyter-binder/HEAD?urlpath=lab/tree/binder.ipynb) ；假如你有一个远端仓库（比如 Github），使用 [克隆 ](https://mybinder.org/v2/gh/Hi-Windom/jupyter-binder/HEAD?urlpath=lab/tree/loader.ipynb)链接
+
+~~任意 ipynb 公开仓库可 [在线生成链接](https://hub.jupyter.org/nbgitpuller/link?tab=binder) ，而无需提供额外配置~~（暂不可用，故障排查中）
 
 基于 Binder 实现，可以在 `Dockerfile` 中 `FROM soltus/jupyter-binder:latest` 开始构建自定义的环境镜像
 
