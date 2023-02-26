@@ -8,12 +8,11 @@ on:
         default: "v"
       tag:
         description: 'docker image ADDITIONAL_TAG'
-      environment:
-        description: 'environment'
-        type: environment
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      hash_tag: ${{ steps.build_docker.outputs.IMAGE_SHA_TAG }}
     steps:
     - name: checkout files in repo
       uses: actions/checkout@master
@@ -22,13 +21,14 @@ jobs:
 
     - name: update jupyter dependencies with repo2docker
       uses: jupyterhub/repo2docker-action@master
+      id: build_docker
       with:
         DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PWD }}
         BINDER_CACHE: true # 写入 binder/Dockerfile
         PUBLIC_REGISTRY_CHECK: true # 检查是否是公开的镜像服务
         MYBINDERORG_TAG: ${{ github.event.ref }}
-        ADDITIONAL_TAG: ${{ github.event.inputs.tag }}
+        ADDITIONAL_TAG: ${{ fromJSON('["${{ github.event.inputs.version }}", "${{ github.event.inputs.tag }}"]')[github.event.inputs.tage == ''] }}
 
   create_release:
     name: Create Release
@@ -52,8 +52,8 @@ jobs:
         id: release_info
         run: |
           echo "::set-output name=release_title::$(git show --format=%s --no-patch | head -1)"
-          echo "::set-output name=release_version::${{ github.event.inputs.version }}_$(TZ=Asia/Shanghai date +'v%Y%m%d%H%M')_${{ steps.build.outputs.IMAGE_SHA_TAG }}"
-          changelog=$(python scripts/release.py -t ${{ github.ref }} Hi-Windom/jupyter-binder)
+          echo "::set-output name=release_version::${{ github.event.inputs.version }}_$(TZ=Asia/Shanghai date +'%Y%m%d')_${{ steps.build.outputs.hash_tag }}"
+          changelog=$(python scripts/release.py -t ${{ github.event.inputs.version }} Hi-Windom/jupyter-binder)
           changelog="${changelog//'%'/'%25'}"
           changelog="${changelog//$'\n'/'%0A'}"
           changelog="${changelog//$'\r'/'%0D'}"
@@ -68,7 +68,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release_name: ${{ steps.release_info.outputs.release_version }}
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ github.event.inputs.version }}
           body: "${{ steps.release_info.outputs.release_body }}"
           draft: false
           prerelease: false
