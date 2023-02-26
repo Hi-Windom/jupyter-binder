@@ -1,9 +1,8 @@
-name: Build Notebook Container
+name: Build Container & Gen Release
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main--DISABLE
+    tags:
+      - "v*"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,3 +18,46 @@ jobs:
         BINDER_CACHE: true # 写入 binder/Dockerfile
         PUBLIC_REGISTRY_CHECK: true # 检查是否是公开的镜像服务
         MYBINDERORG_TAG: ${{ github.event.ref }}
+
+  create_release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+      release_version: ${{ steps.release_info.outputs.release_version }}
+      version: ${{ steps.version.outputs.value }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - run: pip install PyGithub
+
+      - name: Gather Release Information
+        id: release_info
+        run: |
+          echo "::set-output name=release_title::$(git show --format=%s --no-patch | head -1)"
+          echo "::set-output name=release_version::v${{ steps.version.outputs.value }}_$(TZ=Asia/Shanghai date +'%Y%m%d')"
+          changelog=$(python scripts/release.py -t ${{ github.ref }} Hi-Windom/jupyter-binder)
+          changelog="${changelog//'%'/'%25'}"
+          changelog="${changelog//$'\n'/'%0A'}"
+          changelog="${changelog//$'\r'/'%0D'}"
+          echo "::set-output name=release_body::$changelog"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_name: ${{ steps.release_info.outputs.release_version }}
+          tag_name: ${{ github.ref }}
+          body: "${{ steps.release_info.outputs.release_body }}"
+          draft: false
+          prerelease: false
