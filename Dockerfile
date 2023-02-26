@@ -19,6 +19,14 @@ RUN pip install jupyter-wysiwyg
 RUN pip install nbtools
 # nbgitpuller 用于内容仓库与环境仓库分离
 RUN pip install nbgitpuller
+# jupyter node.js kernel
+RUN npm install uuid@8.3.2
+RUN npm install -g ijavascript
+RUN ijsinstall
+# jupyter .NET(C#) kernel
+RUN sudo apt-get install -y aspnetcore-runtime-7.0
+RUN dotnet tool install -g dotnet-try
+RUN dotnet try jupyter install
 # auto run initial work
 RUN nbdime config-git --enable --global
 RUN chown -R ${NB_UID} ${HOME}

@@ -14,7 +14,7 @@ dependencies:
 - jupyterlab-lsp  # lab ext
 - jedi-language-server  # lab ext dep
 - xeus
-- xeus-cling # c++ kernel
+- xeus-cling # c++ kernel, broken
 #>>> extend list
 - hiplot
 - fastapi
