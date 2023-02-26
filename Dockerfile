@@ -31,10 +31,10 @@ RUN ijsinstall
 RUN sudo chmod +x /tmp/dotnet-install.sh
 RUN /tmp/dotnet-install.sh --channel 7.0
 RUN export DOTNET_ROOT=/home/jovyan/.dotnet && export PATH=$PATH:/home/jovyan/.dotnet
-RUN cd /home/jovyan/.dotnet \
-  && dotnet --info \
-  && dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sourcesv --global \
-  && dotnet interactive jupyter install
+RUN cd /home/jovyan/.dotnet && ls \
+  && ./dotnet --info \
+  && ./dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sourcesv --global \
+  && ./dotnet interactive jupyter install
 # auto run initial work
 RUN nbdime config-git --enable --global
 RUN chown -R ${NB_UID} ${HOME}
