@@ -20,7 +20,7 @@ RUN mamba env update -n base --file /tmp/environment.yml \
 # RUN sudo apt-get install -y dotnet-sdk-6.0
 RUN sudo chmod +x /tmp/dotnet-install.sh
 RUN /tmp/dotnet-install.sh --channel 7.0
-RUN export DOTNET_ROOT=/home/jovyan/.dotnet && export PATH=$PATH:/home/jovyan/.dotnet
+RUN export DOTNET_ROOT=/home/jovyan/.dotnet && export PATH=$PATH:/home/jovyan/.dotnet/tools
 RUN cd /home/jovyan/.dotnet && ls \
   && ./dotnet --info \
   && ./dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global \
