@@ -20,7 +20,7 @@ RUN pip install nbtools
 # nbgitpuller 用于内容仓库与环境仓库分离
 RUN pip install nbgitpuller
 # jupyter node.js kernel
-RUN npm install -g npm@9.5.1
+# RUN npm install -g npm@9.5.1 # npm ERR! engine Not compatible with your version of node/npm: npm@9.5.1
 RUN npm install uuid@9.0.0
 RUN npm install -g ijavascript
 RUN ijsinstall
