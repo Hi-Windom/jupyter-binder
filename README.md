@@ -1,17 +1,25 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Soltus/jlab-study-2023/HEAD?urlpath=lab) ![GitHub repo size](https://img.shields.io/github/repo-size/Soltus/jlab-study-2023?logo=github&style=flat-square) [![Build Notebook Container](https://github.com/Soltus/jlab-study-2023/actions/workflows/binder.yaml/badge.svg)](https://github.com/Soltus/jlab-study-2023/actions/workflows/binder.yaml) [![Docker](https://img.shields.io/badge/Docker-585899?logo=docker&style=flat-square)](https://hub.docker.com/repository/docker/soltus/jlab-study-2023) ![Docker Pulls](https://img.shields.io/docker/pulls/soltus/jlab-study-2023?style=flat-square) ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/soltus/jlab-study-2023?style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/Hi-Windom/jupyter-binder?logo=github&style=flat-square) [![Build Notebook Container](https://github.com/Hi-Windom/jupyter-binder/actions/workflows/binder.yaml/badge.svg)](https://github.com/Hi-Windom/jupyter-binder/actions/workflows/binder.yaml) [![Docker](https://img.shields.io/badge/Docker-585899?logo=docker&style=flat-square)](https://hub.docker.com/repository/docker/soltus/jupyter-binder) ![Docker Pulls](https://img.shields.io/docker/pulls/soltus/jupyter-binder?style=flat-square) ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/soltus/jupyter-binder?style=flat-square)
 
 # 简介
 
-此仓库托管在 [Github](https://github.com/Soltus/jlab-study-2023) ，是一八六战略二期工程项目，绛亽新学习融创示范项目
+此仓库托管在 [Github](https://github.com/Hi-Windom/jupyter-binder) ，是一八六战略二期工程项目，绛亽新学习融创示范项目
 
-项目可交互体验依托 [Binder](https://mybinder.org/v2/gh/Soltus/jlab-study-2023/HEAD?urlpath=lab/tree/binder.ipynb) 实现
+基于 Binder 实现，任意 ipynb 公开仓库可 [在线生成链接](https://hub.jupyter.org/nbgitpuller/link?tab=binder)
 
 其开源贡献包括两大方面：
 
-1. 提供一个开箱即用的 Jupyter Lab 环境（Windows AMD64)，包括基础环境与扩展环境
-2. 丰富 Python 编程学习资料
+1. 提供一个开箱即用的在线 Jupyter Lab 环境
+2. 本地快速搭建 Jupyter Lab 环境，包括基础环境与扩展环境
 
-# 复苏
+# 使用
+
+## 在 [Binder (mybinder.org)](https://mybinder.org/) 使用
+
+任意 ipynb 公开仓库可 [在线生成链接](https://hub.jupyter.org/nbgitpuller/link?tab=binder) ，而无需提供额外配置
+
+基于 Binder 实现，可以在 `Dockerfile` 中 `FROM soltus/jupyter-binder:latest` 开始构建自定义的环境镜像
+
+## 在 Windows 本地复苏
 
 > 如果需要镜像加速下载，请参考 [Python镜像 (yuque.com)](https://www.yuque.com/cnbc/py3/image)
 >
@@ -44,4 +52,4 @@ jupyter lab --port='6969' --ip='*' --no-browser --allow-root --notebook-dir='D:\
 
 # 初始化工作
 
-参考 [index.ipynb](https://github.com/Soltus/jlab-study-2023/blob/main/index.ipynb)
+参考 [index.ipynb](https://github.com/Hi-Windom/jupyter-binder/blob/main/index.ipynb)
