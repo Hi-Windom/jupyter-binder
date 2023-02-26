@@ -41,7 +41,7 @@ jobs:
         id: release_info
         run: |
           echo "::set-output name=release_title::$(git show --format=%s --no-patch | head -1)"
-          echo "::set-output name=release_version::v${{ steps.version.outputs.value }}_$(TZ=Asia/Shanghai date +'%Y%m%d')_{{ steps.build.outputs.IMAGE_SHA_NAME }}"
+          echo "::set-output name=release_version::v${{ steps.version.outputs.value }}_$(TZ=Asia/Shanghai date +'%Y%m%d')_${{ steps.build.outputs.IMAGE_SHA_NAME }}"
           changelog=$(python scripts/release.py -t ${{ github.ref }} Hi-Windom/jupyter-binder)
           changelog="${changelog//'%'/'%25'}"
           changelog="${changelog//$'\n'/'%0A'}"
