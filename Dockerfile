@@ -9,7 +9,7 @@ USER root
 RUN sudo rm -rf /home/${NB_USER}/work
 COPY . /home/${NB_USER}
 COPY environment.yml /tmp/environment.yml
-COPY ./dotnet-install.sh /tmp/dotnet-install.sh
+COPY ./scripts/dotnet-install.sh /tmp/dotnet-install.sh
 RUN sudo rm -rf environment.yml
 RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
