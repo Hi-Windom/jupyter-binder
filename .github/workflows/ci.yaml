@@ -7,7 +7,8 @@ on:
         required: true
         default: "v"
       tag:
-        description: 'docker image MYBINDERORG_TAG'
+        description: 'docker binder MYBINDERORG_TAG'
+        required: true
 
 jobs:
   build:
@@ -28,7 +29,7 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PWD }}
         BINDER_CACHE: true # 写入 binder/Dockerfile
         PUBLIC_REGISTRY_CHECK: true # 检查是否是公开的镜像服务
-        MYBINDERORG_TAG: ${{ fromJSON('["${{ github.event.inputs.version }}", "${{ github.event.inputs.tag }}"]')[github.event.inputs.tage == ''] }}
+        MYBINDERORG_TAG: ${{ github.event.inputs.tag }}
 
   create_release:
     name: Create Release
