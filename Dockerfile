@@ -20,11 +20,13 @@ RUN pip install nbtools
 # nbgitpuller 用于内容仓库与环境仓库分离
 RUN pip install nbgitpuller
 # jupyter node.js kernel
-RUN npm install uuid@8.3.2
+RUN npm install -g npm@9.5.1
+RUN npm install uuid@9.0.0
 RUN npm install -g ijavascript
 RUN ijsinstall
 # jupyter .NET(C#) kernel
-RUN sudo apt-get install -y aspnetcore-runtime-7.0
+RUN sudo apt-get update
+RUN sudo apt-get install -y aspnetcore-runtime-6.0
 RUN dotnet tool install -g dotnet-try
 RUN dotnet try jupyter install
 # auto run initial work
