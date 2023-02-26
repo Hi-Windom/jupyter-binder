@@ -13,8 +13,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      hash_tag: ${{ steps.build_docker.outputs.IMAGE_SHA_TAG }}
     steps:
     - name: checkout files in repo
       uses: actions/checkout@master
@@ -53,7 +51,7 @@ jobs:
         id: release_info
         run: |
           echo "::set-output name=release_title::$(git show --format=%s --no-patch | head -1)"
-          echo "::set-output name=release_version::${{ github.event.inputs.version }}_$(TZ=Asia/Shanghai date +'%Y%m%d')_${{ steps.build.outputs.hash_tag }}"
+          echo "::set-output name=release_version::${{ github.event.inputs.version }}_$(TZ=Asia/Shanghai date +'%Y%m%d')"
           changelog=$(python scripts/release.py -t ${{ github.event.inputs.version }} Hi-Windom/jupyter-binder)
           changelog="${changelog//'%'/'%25'}"
           changelog="${changelog//$'\n'/'%0A'}"
