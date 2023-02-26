@@ -15,12 +15,12 @@ RUN sudo rm -rf environment.yml
 RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
 
-# jupyter .NET (C# F# PowerShell JavaScript SQL KQL HTML* Mermaid*) kernel (* Variable sharing not available.)
-# RUN sudo apt-get update
-# RUN sudo apt-get install -y dotnet-sdk-6.0
+# jupyter .NET (C# F# PowerShell) kernel
 RUN sudo chmod +x /tmp/dotnet-install.sh
 RUN /tmp/dotnet-install.sh --channel 7.0
-RUN export DOTNET_ROOT=/home/jovyan/.dotnet && export PATH=$PATH:/home/jovyan/.dotnet/tools && cd /home/jovyan/.dotnet \
+ENV DOTNET_ROOT=/home/${NB_USER}/.dotnet
+ENV PATH=$PATH:/home/${NB_USER}/.dotnet/tools
+RUN export DOTNET_ROOT=/home/${NB_USER}/.dotnet && export PATH=$PATH:/home/${NB_USER}/.dotnet/tools && cd /home/${NB_USER}/.dotnet \
   && ./dotnet --info \
   && ./dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global \
   && ./dotnet interactive jupyter install
@@ -30,7 +30,8 @@ RUN pip install digautoprofiler -q
 RUN pip install jupyter-wysiwyg -q
 RUN pip install nbtools -q
 # nbgitpuller 用于内容仓库与环境仓库分离
-RUN pip install nbgitpuller -q
+# 暂不可用 https://github.com/jupyterhub/nbgitpuller/issues/292
+# RUN pip install nbgitpuller -q
 
 # jupyter node.js kernel
 # RUN npm install -g npm@9.5.1 # npm ERR! engine Not compatible with your version of node/npm: npm@9.5.1
