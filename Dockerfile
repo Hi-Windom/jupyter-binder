@@ -14,20 +14,20 @@ RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
 # Encountered problems while solving by manba ! need pip
 # ignore warn, can not work if use sudo -H
-RUN pip install digautoprofiler
-RUN pip install jupyter-wysiwyg
-RUN pip install nbtools
+RUN pip install digautoprofiler -q
+RUN pip install jupyter-wysiwyg -q
+RUN pip install nbtools -q
 # nbgitpuller 用于内容仓库与环境仓库分离
-RUN pip install nbgitpuller
+RUN pip install nbgitpuller -q
 # jupyter node.js kernel
 # RUN npm install -g npm@9.5.1 # npm ERR! engine Not compatible with your version of node/npm: npm@9.5.1
 RUN npm install uuid@9.0.0
 RUN npm install -g ijavascript@5.2.1
 RUN ijsinstall
-# jupyter .NET(C#) kernel
+# jupyter .NET (C# F# PowerShell JavaScript SQL KQL HTML* Mermaid*) kernel (* Variable sharing not available.)
 RUN sudo apt-get update
-RUN sudo apt-get install -y dotnet-sdk-6.0
-RUN dotnet tool install --global Microsoft.dotnet-interactive
+RUN sudo apt-get install -y dotnet-sdk-7.0
+RUN dotnet tool install -g Microsoft.dotnet-interactive
 RUN dotnet interactive jupyter install
 # auto run initial work
 RUN nbdime config-git --enable --global
