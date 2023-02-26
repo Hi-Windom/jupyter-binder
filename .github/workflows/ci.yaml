@@ -18,12 +18,12 @@ jobs:
       uses: actions/checkout@master
       with:
         ref: main
-    - name: install .NET SDK
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '7.0.x'
-        dotnet-quality: 'preview'
-    - run: dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
+    # - name: install .NET SDK
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: '7.0.x'
+    #     dotnet-quality: 'preview'
+    # - run: dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
 
     - name: update jupyter dependencies with repo2docker
       uses: jupyterhub/repo2docker-action@master
