@@ -30,6 +30,7 @@ RUN ijsinstall
 # RUN sudo apt-get install -y dotnet-sdk-6.0
 RUN sudo chmod +x /tmp/dotnet-install.sh
 RUN /tmp/dotnet-install.sh --channel 7.0
+RUN export DOTNET_ROOT=/home/jovyan/.dotnet
 RUN dotnet tool install -g Microsoft.dotnet-interactive
 RUN dotnet interactive jupyter install
 # auto run initial work
