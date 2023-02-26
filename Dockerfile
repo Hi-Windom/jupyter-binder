@@ -22,11 +22,11 @@ RUN pip install nbgitpuller
 # jupyter node.js kernel
 # RUN npm install -g npm@9.5.1 # npm ERR! engine Not compatible with your version of node/npm: npm@9.5.1
 RUN npm install uuid@9.0.0
-RUN npm install -g ijavascript
+RUN npm install -g ijavascript@5.2.1
 RUN ijsinstall
 # jupyter .NET(C#) kernel
 RUN sudo apt-get update
-RUN sudo apt-get install -y aspnetcore-runtime-6.0
+RUN sudo apt-get install -y dotnet-sdk-6.0
 RUN dotnet tool install -g dotnet-try
 RUN dotnet try jupyter install
 # auto run initial work
