@@ -9,6 +9,7 @@ USER root
 RUN sudo rm -rf /home/${NB_USER}/work
 COPY . /home/${NB_USER}
 COPY environment.yml /tmp/environment.yml
+COPY ./dotnet-install.sh /tmp/dotnet-install.sh
 RUN sudo rm -rf environment.yml
 RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
@@ -25,8 +26,10 @@ RUN npm install uuid@9.0.0
 RUN npm install -g ijavascript@5.2.1
 RUN ijsinstall
 # jupyter .NET (C# F# PowerShell JavaScript SQL KQL HTML* Mermaid*) kernel (* Variable sharing not available.)
-RUN sudo apt-get update
-RUN sudo apt-get install -y dotnet-sdk-7.0
+# RUN sudo apt-get update
+# RUN sudo apt-get install -y dotnet-sdk-6.0
+RUN sudo chmod +x /tmp/dotnet-install.sh
+RUN /tmp/dotnet-install.sh --channel 7.0
 RUN dotnet tool install -g Microsoft.dotnet-interactive
 RUN dotnet interactive jupyter install
 # auto run initial work
