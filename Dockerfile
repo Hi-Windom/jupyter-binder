@@ -25,8 +25,6 @@ RUN mamba env update -n base --file /tmp/environment.yml \
 #   && ./dotnet --info \
 #   && ./dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global \
 #   && ./dotnet interactive jupyter install
-RUN dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global
-RUN dotnet interactive jupyter install
 # Encountered problems while solving by manba ! need pip
 # ignore warn, can not work if use sudo -H
 RUN pip install digautoprofiler -q

@@ -23,7 +23,7 @@ jobs:
       with:
         dotnet-version: '7.0.x'
         dotnet-quality: 'preview'
-    - run: dotnet --info
+    - run: dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
 
     - name: update jupyter dependencies with repo2docker
       uses: jupyterhub/repo2docker-action@master
