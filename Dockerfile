@@ -45,5 +45,7 @@ RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0
-WORKDIR /home/${NB_USER}/.dotnet
+COPY ./scripts/profile /tmp/profile
+RUN sudo rm -rf ./scripts/profile
+RUN cat /tmp/profile >> ~/.bash_profile
 RUN dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
