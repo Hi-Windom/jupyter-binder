@@ -1,0 +1,21 @@
+name: Build Notebook Container
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main--DISABLE
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout files in repo
+      uses: actions/checkout@master
+
+    - name: update jupyter dependencies with repo2docker
+      uses: jupyterhub/repo2docker-action@master
+      with:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USER }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PWD }}
+        BINDER_CACHE: true # 写入 binder/Dockerfile
+        PUBLIC_REGISTRY_CHECK: true # 检查是否是公开的镜像服务
+        MYBINDERORG_TAG: ${{ github.event.ref }}
