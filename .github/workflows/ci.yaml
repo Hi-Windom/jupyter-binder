@@ -5,9 +5,12 @@ on:
       version:
         description: 'Release version'
         required: true
-        default: "$(TZ=Asia/Shanghai date +'v%Y%m%d%H%M')"
+        default: "v"
       tag:
         description: 'docker image ADDITIONAL_TAG'
+      environment:
+        description: 'environment'
+        type: environment
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -49,7 +52,7 @@ jobs:
         id: release_info
         run: |
           echo "::set-output name=release_title::$(git show --format=%s --no-patch | head -1)"
-          echo "::set-output name=release_version::${{ github.event.inputs.version }}_${{ steps.build.outputs.IMAGE_SHA_TAG }}"
+          echo "::set-output name=release_version::${{ github.event.inputs.version }}_$(TZ=Asia/Shanghai date +'v%Y%m%d%H%M')_${{ steps.build.outputs.IMAGE_SHA_TAG }}"
           changelog=$(python scripts/release.py -t ${{ github.ref }} Hi-Windom/jupyter-binder)
           changelog="${changelog//'%'/'%25'}"
           changelog="${changelog//$'\n'/'%0A'}"
