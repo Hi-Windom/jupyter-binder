@@ -1,9 +1,9 @@
 FROM jupyter/scipy-notebook:python-3.9.13
 ARG NB_USER=jovyan
 ARG NB_UID=1000
-# ENV USER ${NB_USER}
-# ENV NB_UID ${NB_UID}
-# ENV HOME /home/${NB_USER}
+ENV USER ${NB_USER}
+ENV NB_UID ${NB_UID}
+ENV HOME /home/${NB_USER}
 USER root
 
 # 删除 jupyter/scipy-notebook 引入的文件夹
@@ -16,14 +16,15 @@ RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
 
 # jupyter .NET (C# F# PowerShell) kernel
-RUN sudo chmod +x /tmp/dotnet-install.sh
-RUN /tmp/dotnet-install.sh --channel 7.0
-ENV DOTNET_ROOT=/home/${NB_USER}/.dotnet
-ENV PATH=$PATH:/home/${NB_USER}/.dotnet/tools
-RUN export DOTNET_ROOT=/home/${NB_USER}/.dotnet && export PATH=$PATH:/home/${NB_USER}/.dotnet/tools && cd /home/${NB_USER}/.dotnet \
-  && ./dotnet --info \
-  && ./dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global \
-  && ./dotnet interactive jupyter install
+# RUN sudo chmod +x /tmp/dotnet-install.sh
+# RUN /tmp/dotnet-install.sh --channel 7.0
+# # 使用 ENV 持久化环境变量
+# ENV DOTNET_ROOT=/home/${NB_USER}/.dotnet
+# ENV PATH=$PATH:/home/${NB_USER}/.dotnet/tools
+# RUN export DOTNET_ROOT=/home/${NB_USER}/.dotnet && export PATH=$PATH:/home/${NB_USER}/.dotnet/tools && cd /home/${NB_USER}/.dotnet \
+#   && ./dotnet --info \
+#   && ./dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global \
+#   && ./dotnet interactive jupyter install
 # Encountered problems while solving by manba ! need pip
 # ignore warn, can not work if use sudo -H
 RUN pip install digautoprofiler -q
@@ -42,3 +43,7 @@ RUN ijsinstall
 RUN nbdime config-git --enable --global
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
+
+FROM mcr.microsoft.com/dotnet/sdk:7.0
+WORKDIR /home/${NB_USER}/.dotnet
+RUN dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
