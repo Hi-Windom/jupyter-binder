@@ -6,6 +6,9 @@ ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
 USER root
 
+COPY ./scripts/profile /tmp/profile
+# RUN rm -rf ./scripts/profile
+RUN sudo cat /tmp/profile >> /etc/profile
 # 删除 jupyter/scipy-notebook 引入的文件夹
 RUN sudo rm -rf /home/${NB_USER}/work
 COPY . /home/${NB_USER}
@@ -45,7 +48,4 @@ RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0
-COPY ./scripts/profile /tmp/profile
-# RUN rm -rf ./scripts/profile
-RUN cat /tmp/profile >> ~/.bash_profile
 RUN dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
