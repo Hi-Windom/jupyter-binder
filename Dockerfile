@@ -27,8 +27,8 @@ RUN ijsinstall
 # jupyter .NET(C#) kernel
 RUN sudo apt-get update
 RUN sudo apt-get install -y dotnet-sdk-6.0
-RUN dotnet tool install -g dotnet-try
-RUN dotnet try jupyter install
+RUN dotnet tool install --global Microsoft.dotnet-interactive
+RUN dotnet interactive jupyter install
 # auto run initial work
 RUN nbdime config-git --enable --global
 RUN chown -R ${NB_UID} ${HOME}
