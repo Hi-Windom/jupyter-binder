@@ -4,10 +4,10 @@ FROM golang:1.20.1-bullseye as GO
 RUN go install github.com/janpfeifer/gonb@latest \
 && go install golang.org/x/tools/cmd/goimports@latest \
 && go install golang.org/x/tools/gopls@latest \
-&& gonb --install
+&& gonb --install \
+&& go env
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
-COPY --from=GO . .
 # https://learn.microsoft.com/zh-cn/dotnet/core/tools/dotnet-tool-install
 RUN dotnet --info && dotnet tool install Microsoft.dotnet-interactive --global
 
@@ -24,6 +24,7 @@ ENV HOME /home/${NB_USER}
 #     --uid ${NB_UID} \
 #     ${NB_USER}
 USER root
+# COPY --from=GO . .
 COPY --from=DOTNET /usr/share/dotnet/ /usr/share/dotnet/
 COPY --from=DOTNET /root/.dotnet/ /home/${NB_USER}/.dotnet/
 # RUN sudo find / -type f -name "dotnet"
