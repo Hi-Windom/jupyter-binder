@@ -4,7 +4,7 @@ ARG NB_UID=1000
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
-RUN dotnet info
+RUN dotnet --info
 # from=JUPYTER 已存在 jovyan 用户
 # RUN adduser --disabled-password \
 #     --gecos "Default user" \
