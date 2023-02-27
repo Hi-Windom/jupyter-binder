@@ -1,9 +1,13 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
+# https://learn.microsoft.com/zh-cn/dotnet/core/tools/dotnet-tool-install
 RUN dotnet --info && dotnet tool install Microsoft.dotnet-interactive --global
 
 FROM jupyter/scipy-notebook:python-3.9.13 as JUPYTER
 ARG NB_USER=jovyan
 ARG NB_UID=1000
+ENV USER ${NB_USER}
+ENV NB_UID ${NB_UID}
+ENV HOME /home/${NB_USER}
 # FROM 包含了创建 jovyan 用户
 # from=JUPYTER 已存在 jovyan 用户
 # RUN adduser --disabled-password \
@@ -12,13 +16,12 @@ ARG NB_UID=1000
 #     ${NB_USER}
 USER root
 COPY --from=DOTNET /usr/share/dotnet/ /usr/share/dotnet/
-COPY --from=DOTNET /root/.dotnet/ /root/.dotnet/
+COPY --from=DOTNET /root/.dotnet/ /home/${NB_USER}/.dotnet/
 # RUN sudo find / -type f -name "dotnet"
 ENV DOTNET_ROOT=/usr/share/dotnet
-ENV PATH=$PATH:/usr/share/dotnet/:/root/.dotnet/tools/
-ENV USER ${NB_USER}
-ENV NB_UID ${NB_UID}
-ENV HOME /home/${NB_USER}
+ENV PATH=$PATH:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/
+# jupyter .NET (C# F# PowerShell) kernel
+RUN dotnet interactive jupyter install
 COPY . /home/${NB_USER}
 COPY environment.yml /tmp/environment.yml
 RUN sudo rm -rf environment.yml \
@@ -48,6 +51,3 @@ RUN nbdime config-git --enable --global \
 && conda init
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
-# jupyter .NET (C# F# PowerShell) kernel
-# REF https://blog.51cto.com/u_14301180/5354253?articleABtest=0
-CMD ["/bin/bash","-c","dotnet interactive jupyter install"]
