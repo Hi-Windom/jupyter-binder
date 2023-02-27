@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
-RUN dotnet --info
+RUN dotnet --info && dotnet tool install Microsoft.dotnet-interactive --global
 
 FROM jupyter/scipy-notebook:python-3.9.13 as JUPYTER
 ARG NB_USER=jovyan
@@ -27,8 +27,7 @@ RUN sudo rm -rf environment.yml
 RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
 # jupyter .NET (C# F# PowerShell) kernel
-RUN dotnet tool install Microsoft.dotnet-interactive --global \
-&& dotnet-interactive jupyter install
+RUN conda activate && dotnet interactive jupyter install
 # Encountered problems while solving by manba ! need pip
 # ignore warn, can not work if use sudo -H
 RUN pip install digautoprofiler -q
