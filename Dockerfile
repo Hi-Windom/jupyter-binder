@@ -35,7 +35,10 @@ COPY --from=DOTNET /root/.dotnet/ /home/${NB_USER}/.dotnet/
 # RUN sudo find / -type f -name "dotnet"
 ENV DOTNET_ROOT=/usr/share/dotnet RUSTUP_HOME=/usr/local/rustup CARGO_HOME=/home/jovyan/.cargo
 # PATH 单列项
-ENV PATH=$PATH:/usr/local/cargo/bin/:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/:/usr/local/go/bin/:/go/bin/
+ENV PATH=$PATH:/home/jovyan/.cargo/bin/:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/:/usr/local/go/bin/:/go/bin/
+# jupyter Rust kernel
+RUN rustup install stable && cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter" \
+&& rustup component add rust-src && evcxr_jupyter --install
 # jupyter .NET (C# F# PowerShell) kernel
 RUN dotnet interactive jupyter install
 # jupyter GO kernel
@@ -43,9 +46,6 @@ RUN go install github.com/janpfeifer/gonb@latest \
 && go install golang.org/x/tools/cmd/goimports@latest \
 && go install golang.org/x/tools/gopls@latest \
 && gonb --install
-# jupyter Rust kernel
-RUN rustup install stable && cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter" \
-&& rustup component add rust-src && evcxr_jupyter --install
 COPY . /home/${NB_USER}
 COPY environment.yml /tmp/environment.yml
 RUN sudo rm -rf environment.yml \
