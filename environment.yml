@@ -13,6 +13,7 @@ dependencies:
 - jupyter-archive # lab ext
 - jupyterlab-lsp  # lab ext
 - jedi-language-server  # lab ext dep
+- oauthenticator # https://oauthenticator.readthedocs.io/en/latest/tutorials/install.html
 # - xeus-cling # c++ kernel, do not need and can not work
 #>>> extend list
 - hiplot
