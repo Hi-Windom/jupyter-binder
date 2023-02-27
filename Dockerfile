@@ -1,5 +1,8 @@
 # kernel list https://github.com/jupyter/jupyter/wiki/Jupyter-kernels
 
+FROM rust:alpine3.17 as RUST
+RUN find / -type f -name "cargo"
+
 FROM golang:1.20.1-bullseye as GO
 # debian env
 RUN go env
