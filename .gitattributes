@@ -1,3 +1,7 @@
 # https://github.com/github/linguist/blob/master/docs/overrides.md
 *.in linguist-language=python
+samples/notebooks/csharp/*/*.ipynb linguist-language=csharp
+samples/notebooks/fsharp/*/*.ipynb linguist-language=fsharp
+samples/notebooks/javascript/*/*.ipynb linguist-language=js
+samples/notebooks/powershell/*/*.ipynb linguist-language=shell
 index.ipynb linguist-vendored
