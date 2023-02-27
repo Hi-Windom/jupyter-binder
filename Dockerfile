@@ -37,8 +37,9 @@ ENV DOTNET_ROOT=/usr/share/dotnet RUSTUP_HOME=/usr/local/rustup CARGO_HOME=/home
 # PATH 单列项
 ENV PATH=$PATH:/home/jovyan/.cargo/bin/:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/:/usr/local/go/bin/:/go/bin/
 # jupyter Rust kernel
-RUN rustup install stable && cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter" \
-&& rustup component add rust-src && evcxr_jupyter --install
+RUN rustup install stable && find / -type f -name "cargo"
+#  && cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter" \
+# && rustup component add rust-src && evcxr_jupyter --install
 # jupyter .NET (C# F# PowerShell) kernel
 RUN dotnet interactive jupyter install
 # jupyter GO kernel
