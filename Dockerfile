@@ -12,7 +12,7 @@ RUN dotnet --info
 #     ${NB_USER}
 
 FROM jupyter/scipy-notebook:python-3.9.13 as JUPYTER
-COPY --from=DOTNET . .
+COPY --from=DOTNET /usr/share/dotnet /home/jovyan/.dotnet
 ARG NB_USER=jovyan
 ARG NB_UID=1000
 ENV USER ${NB_USER}
@@ -32,7 +32,7 @@ RUN sudo rm -rf environment.yml
 RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
 # jupyter .NET (C# F# PowerShell) kernel
-RUN export DOTNET_ROOT=/home/${NB_USER}/.dotnet && export PATH="$PATH:/home/jovyan/.dotnet/tools" \
+RUN export DOTNET_ROOT=/home/jovyan/.dotnet && export PATH="$PATH:/home/jovyan/.dotnet/tools" \
 && dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
 # RUN sudo chmod +x /tmp/dotnet-install.sh
 # RUN /tmp/dotnet-install.sh --channel 7.0
