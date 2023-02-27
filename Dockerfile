@@ -3,9 +3,7 @@
 FROM golang:1.20.1-bullseye as GO
 # debian env
 RUN go env
-USER root
-RUN find / -type f -name "go"
-RUN gogogo
+# RUN find / -type f -name "go"
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
 # https://learn.microsoft.com/zh-cn/dotnet/core/tools/dotnet-tool-install
@@ -33,7 +31,9 @@ RUN go install github.com/janpfeifer/gonb@latest \
 COPY --from=DOTNET /usr/share/dotnet/ /usr/share/dotnet/
 COPY --from=DOTNET /root/.dotnet/ /home/${NB_USER}/.dotnet/
 # RUN sudo find / -type f -name "dotnet"
-ENV DOTNET_ROOT=/usr/share/dotnet PATH=$PATH:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/
+ENV DOTNET_ROOT=/usr/share/dotnet
+# PATH 单列项
+ENV PATH=$PATH:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/:/usr/local/go/bin/
 # jupyter .NET (C# F# PowerShell) kernel
 RUN dotnet interactive jupyter install
 COPY . /home/${NB_USER}
