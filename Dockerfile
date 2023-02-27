@@ -1,8 +1,8 @@
 # kernel list https://github.com/jupyter/jupyter/wiki/Jupyter-kernels
 
-FROM rust:alpine3.17 as RUST
+FROM rust:1.67.1-alpine3.17 as RUST
 # RUN find / -type f -name "cargo" && find / -type f -name "rustc" && find / -type f -name "rustup" && printenv CARGO_HOME && printenv RUSTUP_HOME
-RUN cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter"
+RUN cargo rustc -- -C link-arg=-nostartfiles && cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter"
 
 FROM golang:1.20.1-bullseye as GO
 # debian env
