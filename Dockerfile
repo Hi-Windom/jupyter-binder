@@ -1,11 +1,10 @@
-FROM jupyter/scipy-notebook:python-3.9.13
+FROM jupyter/scipy-notebook:python-3.9.13 as JUPYTER
 ARG NB_USER=jovyan
 ARG NB_UID=1000
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
 USER root
-
 COPY ./scripts/profile /tmp/profile
 # RUN rm -rf ./scripts/profile
 RUN sudo cat /tmp/profile >> /etc/profile
@@ -18,7 +17,6 @@ COPY ./scripts/dotnet-install.sh /tmp/dotnet-install.sh
 RUN sudo rm -rf environment.yml
 RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
-
 # jupyter .NET (C# F# PowerShell) kernel
 # RUN sudo chmod +x /tmp/dotnet-install.sh
 # RUN /tmp/dotnet-install.sh --channel 7.0
@@ -37,7 +35,6 @@ RUN pip install nbtools -q
 # nbgitpuller 用于内容仓库与环境仓库分离
 # 暂不可用 https://github.com/jupyterhub/nbgitpuller/issues/292
 # RUN pip install nbgitpuller -q
-
 # jupyter node.js kernel
 # RUN npm install -g npm@9.5.1 # npm ERR! engine Not compatible with your version of node/npm: npm@9.5.1
 RUN npm install uuid@9.0.0
@@ -48,7 +45,8 @@ RUN nbdime config-git --enable --global
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0
+FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
+COPY --from=JUPYTER . .
 ARG NB_USER=jovyan
 ARG NB_UID=1000
 ENV USER ${NB_USER}
