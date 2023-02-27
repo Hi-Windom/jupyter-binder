@@ -12,7 +12,7 @@ RUN dotnet --info && dotnet tool install Microsoft.dotnet-interactive --ignore-f
 #     ${NB_USER}
 
 FROM jupyter/scipy-notebook:python-3.9.13 as JUPYTER
-COPY --from=DOTNET . .
+COPY --from=DOTNET / /
 ARG NB_USER=jovyan
 ARG NB_UID=1000
 ENV USER ${NB_USER}
