@@ -25,7 +25,7 @@ ENV HOME=/home/${NB_USER}
 #     --uid ${NB_UID} \
 #     ${NB_USER}
 USER root
-COPY --from=RUST /usr/local/cargo /usr/local/cargo
+COPY --from=RUST /usr/local/cargo /home/jovyan/.cargo
 COPY --from=RUST /usr/local/rustup /usr/local/rustup
 COPY --from=GO /go /go
 COPY --from=GO /usr/local/go /usr/local/go
@@ -33,7 +33,7 @@ ENV GOVERSION="go1.20.1" GCCGO="gccgo" GOENV=/home/${NB_USER}/.config/go/env GOR
 COPY --from=DOTNET /usr/share/dotnet/ /usr/share/dotnet/
 COPY --from=DOTNET /root/.dotnet/ /home/${NB_USER}/.dotnet/
 # RUN sudo find / -type f -name "dotnet"
-ENV DOTNET_ROOT=/usr/share/dotnet RUSTUP_HOME=/usr/local/rustup
+ENV DOTNET_ROOT=/usr/share/dotnet RUSTUP_HOME=/usr/local/rustup CARGO_HOME=/home/jovyan/.cargo
 # PATH 单列项
 ENV PATH=$PATH:/usr/local/cargo/bin/:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/:/usr/local/go/bin/:/go/bin/
 # jupyter .NET (C# F# PowerShell) kernel
