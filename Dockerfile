@@ -29,7 +29,7 @@ COPY --from=DOTNET /root/.dotnet/ /home/${NB_USER}/.dotnet/
 # RUN sudo find / -type f -name "dotnet"
 ENV DOTNET_ROOT=/usr/share/dotnet
 # PATH 单列项
-ENV PATH=$PATH:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/:/usr/local/go/bin/
+ENV PATH=$PATH:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/:/usr/local/go/bin/:/go/bin/
 # jupyter .NET (C# F# PowerShell) kernel
 RUN dotnet interactive jupyter install
 # jupyter GO kernel
