@@ -24,26 +24,30 @@ COPY environment.yml /tmp/environment.yml
 RUN sudo rm -rf environment.yml \
 && sudo rm -rf /home/${NB_USER}/work
 # 删除 jupyter/scipy-notebook 引入的文件夹 work
+#
 RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
-# jupyter .NET (C# F# PowerShell) kernel
-RUN conda init
-# RUN conda activate && dotnet interactive jupyter install
+#
 # Encountered problems while solving by manba ! need pip
 # ignore warn, can not work if use sudo -H
 RUN pip install digautoprofiler -q \
 && pip install jupyter-wysiwyg -q \
 && pip install nbtools -q
+#
 # nbgitpuller 用于内容仓库与环境仓库分离
 # 暂不可用 https://github.com/jupyterhub/nbgitpuller/issues/292
 # RUN pip install nbgitpuller -q
+#
 # jupyter node.js kernel
 # RUN npm install -g npm@9.5.1 # npm ERR! engine Not compatible with your version of node/npm: npm@9.5.1
 RUN npm install uuid@9.0.0 \
 && npm install -g ijavascript@5.2.1 \
 && ijsinstall
 # auto run initial work
-RUN nbdime config-git --enable --global
+RUN nbdime config-git --enable --global \
+&& conda init
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
-ENTRYPOINT ["/bin/bash","-c","conda activate && dotnet interactive jupyter install"]
+# jupyter .NET (C# F# PowerShell) kernel
+# REF https://blog.51cto.com/u_14301180/5354253?articleABtest=0
+CMD ["/bin/bash","-c","dotnet interactive jupyter install"]
