@@ -1,4 +1,17 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
+ARG NB_USER=jovyan
+ARG NB_UID=1000
+ENV USER ${NB_USER}
+ENV NB_UID ${NB_UID}
+ENV HOME /home/${NB_USER}
+# from=JUPYTER 已存在 jovyan 用户
+# RUN adduser --disabled-password \
+#     --gecos "Default user" \
+#     --uid ${NB_UID} \
+#     ${NB_USER}
+
 FROM jupyter/scipy-notebook:python-3.9.13 as JUPYTER
+COPY --from=DOTNET . .
 ARG NB_USER=jovyan
 ARG NB_UID=1000
 ENV USER ${NB_USER}
@@ -18,6 +31,8 @@ RUN sudo rm -rf environment.yml
 RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
 # jupyter .NET (C# F# PowerShell) kernel
+RUN export PATH="$PATH:/home/jovyan/.dotnet/tools" \
+&& dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
 # RUN sudo chmod +x /tmp/dotnet-install.sh
 # RUN /tmp/dotnet-install.sh --channel 7.0
 # # 使用 ENV 持久化环境变量
@@ -42,24 +57,5 @@ RUN npm install -g ijavascript@5.2.1
 RUN ijsinstall
 # auto run initial work
 RUN nbdime config-git --enable --global
-
-FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
-COPY --from=JUPYTER . .
-ARG NB_USER=jovyan
-ARG NB_UID=1000
-ENV USER ${NB_USER}
-ENV NB_UID ${NB_UID}
-ENV HOME /home/${NB_USER}
-# from=JUPYTER 已存在 jovyan 用户
-# RUN adduser --disabled-password \
-#     --gecos "Default user" \
-#     --uid ${NB_UID} \
-#     ${NB_USER}
-RUN export PATH="$PATH:/home/jovyan/.dotnet/tools" \
-&& dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
-
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
-# REF https://github.com/jupyter/docker-stacks/blob/main/docker-stacks-foundation/Dockerfile
-ENTRYPOINT ["tini", "-g", "--"]
-WORKDIR "${HOME}"
