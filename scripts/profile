@@ -1,3 +1,2 @@
-# Add .NET Core SDK tools
-export PATH="$PATH:/home/jovyan/.dotnet/tools"
+export PATH=$PATH:/root/.dotnet/tools
 EOF

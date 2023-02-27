@@ -19,7 +19,7 @@ ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
 ENV DOTNET_ROOT=/usr/share/dotnet
-ENV PATH=$PATH:/usr/share/dotnet/tools
+ENV PATH=$PATH:/root/.dotnet/tools
 USER root
 COPY ./scripts/profile /tmp/profile
 # RUN rm -rf ./scripts/profile
@@ -34,7 +34,7 @@ RUN sudo rm -rf environment.yml
 RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
 # jupyter .NET (C# F# PowerShell) kernel
-RUN export DOTNET_ROOT=/usr/share/dotnet && export PATH="$PATH:/usr/share/dotnet/tools" \
+RUN export DOTNET_ROOT=/usr/share/dotnet && export PATH=$PATH:/root/.dotnet/tools \
 && dotnet interactive jupyter install
 # RUN sudo chmod +x /tmp/dotnet-install.sh
 # RUN /tmp/dotnet-install.sh --channel 7.0
