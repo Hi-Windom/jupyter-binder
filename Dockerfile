@@ -24,18 +24,17 @@ ENV HOME=/home/${NB_USER}
 #     --uid ${NB_UID} \
 #     ${NB_USER}
 USER root
-COPY --from=RUST /usr/local/cargo /home/jovyan/.cargo
+COPY --from=RUST /usr/local/cargo /usr/local/cargo
 COPY --from=RUST /usr/local/rustup /usr/local/rustup
-ENV CARGO_HOME=/home/jovyan/.cargo RUSTUP_HOME=/usr/local/rustup
 COPY --from=GO /go /go
 COPY --from=GO /usr/local/go /usr/local/go
 ENV GOVERSION="go1.20.1" GCCGO="gccgo" GOENV=/home/${NB_USER}/.config/go/env GOROOT=/usr/local/go GOPATH=/go GOMODCACHE=/go/pkg/mod GOTOOLDIR=/usr/local/go/pkg/tool/linux_amd64
 COPY --from=DOTNET /usr/share/dotnet/ /usr/share/dotnet/
 COPY --from=DOTNET /root/.dotnet/ /home/${NB_USER}/.dotnet/
 # RUN sudo find / -type f -name "dotnet"
-ENV DOTNET_ROOT=/usr/share/dotnet
+ENV DOTNET_ROOT=/usr/share/dotnet RUSTUP_HOME=/usr/local/rustup
 # PATH 单列项
-ENV PATH=$PATH:/home/jovyan/.cargo/bin/:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/:/usr/local/go/bin/:/go/bin/
+ENV PATH=$PATH:/usr/local/cargo/bin/:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/:/usr/local/go/bin/:/go/bin/
 # jupyter .NET (C# F# PowerShell) kernel
 RUN dotnet interactive jupyter install
 # jupyter GO kernel
