@@ -35,8 +35,8 @@ RUN dotnet interactive jupyter install
 # jupyter GO kernel
 RUN go install github.com/janpfeifer/gonb@latest \
 && go install golang.org/x/tools/cmd/goimports@latest \
-&& go install golang.org/x/tools/gopls@latest \
-&& gonb --install
+&& go install golang.org/x/tools/gopls@latest
+RUN gonb --install
 COPY . /home/${NB_USER}
 COPY environment.yml /tmp/environment.yml
 RUN sudo rm -rf environment.yml \
