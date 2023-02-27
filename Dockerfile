@@ -28,7 +28,7 @@ RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
 # jupyter .NET (C# F# PowerShell) kernel
 RUN dotnet tool install Microsoft.dotnet-interactive --global \
-&& dotnet interactive jupyter install
+&& dotnet-interactive jupyter install
 # Encountered problems while solving by manba ! need pip
 # ignore warn, can not work if use sudo -H
 RUN pip install digautoprofiler -q
