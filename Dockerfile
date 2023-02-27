@@ -1,6 +1,7 @@
-FROM jupyter/scipy-notebook:python-3.9.13
 ARG NB_USER=jovyan
 ARG NB_UID=1000
+
+FROM jupyter/scipy-notebook:python-3.9.13
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
@@ -49,5 +50,9 @@ RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0
+ENV USER ${NB_USER}
+ENV NB_UID ${NB_UID}
+ENV HOME /home/${NB_USER}
+USER ${NB_USER}
 RUN export PATH="$PATH:/root/.dotnet/tools" \
 && dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
