@@ -1,25 +1,21 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
-# ARG NB_USER=jovyan
-# ARG NB_UID=1000
-# ENV USER ${NB_USER}
-# ENV NB_UID ${NB_UID}
-# ENV HOME /home/${NB_USER}
 RUN dotnet --info && dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global
+
+FROM jupyter/scipy-notebook:python-3.9.13 as JUPYTER
+ARG NB_USER=jovyan
+ARG NB_UID=1000
+# FROM 包含了创建 jovyan 用户
 # from=JUPYTER 已存在 jovyan 用户
 # RUN adduser --disabled-password \
 #     --gecos "Default user" \
 #     --uid ${NB_UID} \
 #     ${NB_USER}
-
-FROM jupyter/scipy-notebook:python-3.9.13 as JUPYTER
 USER root
 COPY --from=DOTNET /usr/share/dotnet/ /usr/share/dotnet/
 COPY --from=DOTNET /root/.dotnet/ /root/.dotnet/
-RUN sudo find / -type f -name "dotnet"
+# RUN sudo find / -type f -name "dotnet"
 ENV DOTNET_ROOT=/usr/share/dotnet
 ENV PATH=$PATH:/usr/share/dotnet/:/root/.dotnet/tools/
-ARG NB_USER=jovyan
-ARG NB_UID=1000
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
