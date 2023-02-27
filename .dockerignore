@@ -1,6 +1,6 @@
 /*.txt
 /*.in
 /*.md
-templates
-scripts
+/templates
+/scripts
 Dockerfile
