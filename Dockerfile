@@ -9,7 +9,7 @@ USER root
 COPY ./scripts/profile /tmp/profile
 # RUN rm -rf ./scripts/profile
 RUN sudo cat /tmp/profile >> /etc/profile
-RUN sudo cqt /tmp/profile >> /root/.bashrc
+RUN sudo cat /tmp/profile >> /root/.bashrc
 # 删除 jupyter/scipy-notebook 引入的文件夹
 RUN sudo rm -rf /home/${NB_USER}/work
 COPY . /home/${NB_USER}
