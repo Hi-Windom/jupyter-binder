@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
 # ENV USER ${NB_USER}
 # ENV NB_UID ${NB_UID}
 # ENV HOME /home/${NB_USER}
-RUN dotnet --info
+RUN dotnet --info && dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global
 # from=JUPYTER 已存在 jovyan 用户
 # RUN adduser --disabled-password \
 #     --gecos "Default user" \
@@ -13,12 +13,13 @@ RUN dotnet --info
 
 FROM jupyter/scipy-notebook:python-3.9.13 as JUPYTER
 COPY --from=DOTNET . .
-RUN ln -s /usr/share/dotnet /home/jovyan/.dotnet
 ARG NB_USER=jovyan
 ARG NB_UID=1000
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
+ENV DOTNET_ROOT=/usr/share/dotnet
+ENV PATH=$PATH:/usr/share/dotnet/tools
 USER root
 COPY ./scripts/profile /tmp/profile
 # RUN rm -rf ./scripts/profile
@@ -33,8 +34,8 @@ RUN sudo rm -rf environment.yml
 RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
 # jupyter .NET (C# F# PowerShell) kernel
-RUN export DOTNET_ROOT=/home/jovyan/.dotnet && export PATH="$PATH:/home/jovyan/.dotnet/tools" \
-&& dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
+RUN export DOTNET_ROOT=/usr/share/dotnet && export PATH="$PATH:/usr/share/dotnet/tools" \
+&& dotnet interactive jupyter install
 # RUN sudo chmod +x /tmp/dotnet-install.sh
 # RUN /tmp/dotnet-install.sh --channel 7.0
 # # 使用 ENV 持久化环境变量
