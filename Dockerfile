@@ -49,5 +49,5 @@ RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0
-RUN export PATH="$PATH:/root/.dotnet/tools"
-RUN dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
+RUN export PATH="$PATH:/root/.dotnet/tools" \
+&& dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
