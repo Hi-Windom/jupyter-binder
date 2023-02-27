@@ -21,7 +21,6 @@ ENV HOME /home/${NB_USER}
 #     ${NB_USER}
 USER root
 COPY --from=GO /go /go
-COPY --from=GO /root/.config/go /home/${NB_USER}/.config/go
 COPY --from=GO /usr/local/go /usr/local/go
 ENV GOVERSION="go1.20.1"
 ENV GCCGO="gccgo"
