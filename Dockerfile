@@ -1,6 +1,7 @@
 # kernel list https://github.com/jupyter/jupyter/wiki/Jupyter-kernels
 
 FROM rust:1.67.1-alpine3.17 as RUST
+RUN rustup install stable
 # RUN find / -type f -name "cargo" && find / -type f -name "rustc" && find / -type f -name "rustup" && printenv CARGO_HOME && printenv RUSTUP_HOME
 
 
@@ -37,7 +38,7 @@ ENV DOTNET_ROOT=/usr/share/dotnet RUSTUP_HOME=/usr/local/rustup CARGO_HOME=/home
 # PATH 单列项
 ENV PATH=$PATH:/home/jovyan/.cargo/bin/:/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-musl/bin/:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/:/usr/local/go/bin/:/go/bin/
 # jupyter Rust kernel
-RUN rustup install stable && cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter" \
+RUN cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter" \
 && rustup component add rust-src && evcxr_jupyter --install
 # jupyter .NET (C# F# PowerShell) kernel
 RUN dotnet interactive jupyter install
