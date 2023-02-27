@@ -1,8 +1,8 @@
 # kernel list https://github.com/jupyter/jupyter/wiki/Jupyter-kernels
 
 FROM rust:alpine3.17 as RUST
-RUN rustup component add rust-src
-# RUN find / -type f -name "cargo" && find / -type f -name "rustc" && find / -type f -name "rustup"
+RUN rustup set profile minimal && rustup component add rust-src
+RUN find / -type f -name "cargo" && find / -type f -name "rustc" && find / -type f -name "rustup" && printenv CARGO_HOME && printenv RUSTUP_HOME
 
 FROM golang:1.20.1-bullseye as GO
 # debian env
