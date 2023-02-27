@@ -16,6 +16,8 @@
 ## 在 [Binder (mybinder.org)](https://mybinder.org/) 使用
 
 > 已集成 .NET 和 node.js 内核
+>
+> 是否考虑集成 C++ 内核？不会考虑，C++ 并不适合 notebook ，集成的意义不明显
 
 直接使用：直接打开链接 [开始](https://mybinder.org/v2/gh/Hi-Windom/jupyter-binder/HEAD?urlpath=lab/tree/binder.ipynb) ；假如你有一个远端仓库（比如 Github），使用 [克隆 ](https://mybinder.org/v2/gh/Hi-Windom/jupyter-binder/HEAD?urlpath=lab/tree/loader.ipynb)链接
 

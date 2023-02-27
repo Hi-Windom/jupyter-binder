@@ -23,7 +23,7 @@ ENV HOME=/home/${NB_USER}
 USER root
 COPY --from=GO /go /go
 COPY --from=GO /usr/local/go /usr/local/go
-ENV GOVERSION="go1.20.1" GCCGO="gccgo" GOENV=/home/${NB_USER}/.config/go/env GOROOT=/usr/local/go GOMODCACHE=/go/pkg/mod GOTOOLDIR=/usr/local/go/pkg/tool/linux_amd64
+ENV GOVERSION="go1.20.1" GCCGO="gccgo" GOENV=/home/${NB_USER}/.config/go/env GOROOT=/usr/local/go GOPATH=/go GOMODCACHE=/go/pkg/mod GOTOOLDIR=/usr/local/go/pkg/tool/linux_amd64
 COPY --from=DOTNET /usr/share/dotnet/ /usr/share/dotnet/
 COPY --from=DOTNET /root/.dotnet/ /home/${NB_USER}/.dotnet/
 # RUN sudo find / -type f -name "dotnet"
@@ -35,8 +35,8 @@ RUN dotnet interactive jupyter install
 # jupyter GO kernel
 RUN go install github.com/janpfeifer/gonb@latest \
 && go install golang.org/x/tools/cmd/goimports@latest \
-&& go install golang.org/x/tools/gopls@latest
-RUN gonb --install
+&& go install golang.org/x/tools/gopls@latest \
+&& gonb --install
 COPY . /home/${NB_USER}
 COPY environment.yml /tmp/environment.yml
 RUN sudo rm -rf environment.yml \
