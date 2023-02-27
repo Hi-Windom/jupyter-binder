@@ -1,11 +1,7 @@
 # kernel list https://github.com/jupyter/jupyter/wiki/Jupyter-kernels
 
 FROM golang:1.20.1-bullseye as GO
-RUN go install github.com/janpfeifer/gonb@latest \
-&& go install golang.org/x/tools/cmd/goimports@latest \
-&& go install golang.org/x/tools/gopls@latest \
-&& gonb --install \
-&& go env
+RUN go env
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
 # https://learn.microsoft.com/zh-cn/dotnet/core/tools/dotnet-tool-install
@@ -24,7 +20,19 @@ ENV HOME /home/${NB_USER}
 #     --uid ${NB_UID} \
 #     ${NB_USER}
 USER root
-# COPY --from=GO . .
+COPY --from=GO /go /go
+COPY --from=GO /root/.config/go /home/${NB_USER}/.config/go
+COPY --from=GO /usr/local/go /usr/local/go
+ENV GOVERSION="go1.20.1"
+ENV GCCGO="gccgo"
+ENV GOENV=/home/${NB_USER}/.config/go/env
+ENV GOROOT=/usr/local/go
+ENV GOMODCACHE=/go/pkg/mod
+ENV GOTOOLDIR=/usr/local/go/pkg/tool/linux_amd64
+RUN go install github.com/janpfeifer/gonb@latest \
+&& go install golang.org/x/tools/cmd/goimports@latest \
+&& go install golang.org/x/tools/gopls@latest \
+&& gonb --install
 COPY --from=DOTNET /usr/share/dotnet/ /usr/share/dotnet/
 COPY --from=DOTNET /root/.dotnet/ /home/${NB_USER}/.dotnet/
 # RUN sudo find / -type f -name "dotnet"
