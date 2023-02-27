@@ -1,6 +1,7 @@
 # kernel list https://github.com/jupyter/jupyter/wiki/Jupyter-kernels
 
 FROM rust:alpine3.17 as RUST
+RUN rustup component add rust-src
 # RUN find / -type f -name "cargo" && find / -type f -name "rustc" && find / -type f -name "rustup"
 
 FROM golang:1.20.1-bullseye as GO
@@ -42,7 +43,7 @@ RUN go install github.com/janpfeifer/gonb@latest \
 && go install golang.org/x/tools/gopls@latest \
 && gonb --install
 # jupyter Rust kernel
-RUN rustup default stable && cargo install evcxr_jupyter && evcxr_jupyter --install && rustup component add rust-src
+RUN cargo install evcxr_jupyter && evcxr_jupyter --install
 COPY . /home/${NB_USER}
 COPY environment.yml /tmp/environment.yml
 RUN sudo rm -rf environment.yml \
