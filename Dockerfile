@@ -4,6 +4,7 @@ ARG NB_UID=1000
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
+RUN dotnet info
 # from=JUPYTER 已存在 jovyan 用户
 # RUN adduser --disabled-password \
 #     --gecos "Default user" \
@@ -31,7 +32,7 @@ RUN sudo rm -rf environment.yml
 RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
 # jupyter .NET (C# F# PowerShell) kernel
-RUN export PATH="$PATH:/home/jovyan/.dotnet/tools" \
+RUN export DOTNET_ROOT=/home/${NB_USER}/.dotnet && export PATH="$PATH:/home/jovyan/.dotnet/tools" \
 && dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
 # RUN sudo chmod +x /tmp/dotnet-install.sh
 # RUN /tmp/dotnet-install.sh --channel 7.0
