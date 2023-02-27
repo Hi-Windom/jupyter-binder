@@ -27,6 +27,7 @@ RUN sudo rm -rf environment.yml
 RUN mamba env update -n base --file /tmp/environment.yml \
   && mamba clean -yaf
 # jupyter .NET (C# F# PowerShell) kernel
+RUN conda init
 RUN conda activate && dotnet interactive jupyter install
 # Encountered problems while solving by manba ! need pip
 # ignore warn, can not work if use sudo -H
