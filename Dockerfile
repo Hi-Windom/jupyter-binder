@@ -1,8 +1,8 @@
 # kernel list https://github.com/jupyter/jupyter/wiki/Jupyter-kernels
 
-# FROM rust:1.67.1-alpine3.17 as RUST
-# # RUN find / -type f -name "cargo" && find / -type f -name "rustc" && find / -type f -name "rustup" && printenv CARGO_HOME && printenv RUSTUP_HOME
-# RUN cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter"
+FROM rust:1.67.1-alpine3.17 as RUST
+# RUN find / -type f -name "cargo" && find / -type f -name "rustc" && find / -type f -name "rustup" && printenv CARGO_HOME && printenv RUSTUP_HOME
+
 
 FROM golang:1.20.1-bullseye as GO
 # debian env
@@ -25,8 +25,8 @@ ENV HOME=/home/${NB_USER}
 #     --uid ${NB_UID} \
 #     ${NB_USER}
 USER root
-# COPY --from=RUST /usr/local/cargo /usr/local/cargo
-# COPY --from=RUST /usr/local/rustup /usr/local/rustup
+COPY --from=RUST /usr/local/cargo /usr/local/cargo
+COPY --from=RUST /usr/local/rustup /usr/local/rustup
 COPY --from=GO /go /go
 COPY --from=GO /usr/local/go /usr/local/go
 ENV GOVERSION="go1.20.1" GCCGO="gccgo" GOENV=/home/${NB_USER}/.config/go/env GOROOT=/usr/local/go GOPATH=/go GOMODCACHE=/go/pkg/mod GOTOOLDIR=/usr/local/go/pkg/tool/linux_amd64
@@ -44,8 +44,8 @@ RUN go install github.com/janpfeifer/gonb@latest \
 && go install golang.org/x/tools/gopls@latest \
 && gonb --install
 # jupyter Rust kernel
-RUN curl -sSf https://static.rust-lang.org/rustup.sh | sh
-RUN cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter" && rustup component add rust-src && evcxr_jupyter --install
+RUN rustup install stable && cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter" \
+&& rustup component add rust-src && evcxr_jupyter --install
 COPY . /home/${NB_USER}
 COPY environment.yml /tmp/environment.yml
 RUN sudo rm -rf environment.yml \
