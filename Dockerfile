@@ -1,9 +1,10 @@
 # kernel list https://github.com/jupyter/jupyter/wiki/Jupyter-kernels
 
 FROM golang:1.20.1-bullseye as GO
+# debian env
 RUN go env
 USER root
-RUN sudo find / -type f -name "go"
+RUN find / -type f -name "go"
 RUN gogogo
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
