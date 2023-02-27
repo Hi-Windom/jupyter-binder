@@ -2,4 +2,5 @@
 /*.in
 /*.md
 templates
+scripts
 Dockerfile

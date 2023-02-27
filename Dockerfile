@@ -24,9 +24,7 @@ ENV PATH=$PATH:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/
 RUN dotnet interactive jupyter install
 COPY . /home/${NB_USER}
 COPY environment.yml /tmp/environment.yml
-COPY script /tmp/script
 RUN sudo rm -rf environment.yml \
-&& sudo rm -rf script \
 && sudo rm -rf /home/${NB_USER}/work
 # 删除 jupyter/scipy-notebook 引入的文件夹 work
 #
