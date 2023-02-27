@@ -1,9 +1,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
-ARG NB_USER=jovyan
-ARG NB_UID=1000
-ENV USER ${NB_USER}
-ENV NB_UID ${NB_UID}
-ENV HOME /home/${NB_USER}
+# ARG NB_USER=jovyan
+# ARG NB_UID=1000
+# ENV USER ${NB_USER}
+# ENV NB_UID ${NB_UID}
+# ENV HOME /home/${NB_USER}
 RUN dotnet --info
 # from=JUPYTER 已存在 jovyan 用户
 # RUN adduser --disabled-password \
@@ -12,7 +12,8 @@ RUN dotnet --info
 #     ${NB_USER}
 
 FROM jupyter/scipy-notebook:python-3.9.13 as JUPYTER
-COPY --from=DOTNET /usr/share/dotnet /home/jovyan/.dotnet
+COPY --from=DOTNET . .
+RUN ln -s /usr/share/dotnet /home/jovyan/.dotnet
 ARG NB_USER=jovyan
 ARG NB_UID=1000
 ENV USER ${NB_USER}
