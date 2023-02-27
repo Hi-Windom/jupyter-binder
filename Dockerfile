@@ -4,7 +4,7 @@ ARG NB_UID=1000
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
-# USER root
+USER root
 COPY ./scripts/profile /tmp/profile
 # RUN rm -rf ./scripts/profile
 RUN sudo cat /tmp/profile >> /etc/profile
@@ -55,11 +55,11 @@ ENV HOME /home/${NB_USER}
 #     --gecos "Default user" \
 #     --uid ${NB_UID} \
 #     ${NB_USER}
-RUN chown -R ${NB_UID} ${HOME}
-USER ${NB_USER}
 RUN export PATH="$PATH:/home/jovyan/.dotnet/tools" \
 && dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
 
+RUN chown -R ${NB_UID} ${HOME}
+USER ${NB_USER}
 # REF https://github.com/jupyter/docker-stacks/blob/main/docker-stacks-foundation/Dockerfile
 ENTRYPOINT ["tini", "-g", "--"]
 WORKDIR "${HOME}"
