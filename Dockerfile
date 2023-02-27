@@ -1,7 +1,8 @@
 # kernel list https://github.com/jupyter/jupyter/wiki/Jupyter-kernels
 
 FROM rust:alpine3.17 as RUST
-RUN find / -type f -name "cargo" && find / -type f -name "rustc" && find / -type f -name "rustup" && printenv CARGO_HOME && printenv RUSTUP_HOME
+# RUN find / -type f -name "cargo" && find / -type f -name "rustc" && find / -type f -name "rustup" && printenv CARGO_HOME && printenv RUSTUP_HOME
+RUN cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter"
 
 FROM golang:1.20.1-bullseye as GO
 # debian env
@@ -43,8 +44,7 @@ RUN go install github.com/janpfeifer/gonb@latest \
 && go install golang.org/x/tools/gopls@latest \
 && gonb --install
 # jupyter Rust kernel
-RUN find / -type f -name "cargo" && cargo version
-RUN rustup component add rust-src && cargo install evcxr_jupyter && evcxr_jupyter --install
+RUN rustup component add rust-src && evcxr_jupyter --install
 COPY . /home/${NB_USER}
 COPY environment.yml /tmp/environment.yml
 RUN sudo rm -rf environment.yml \
