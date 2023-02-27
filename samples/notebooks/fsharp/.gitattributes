@@ -1,3 +1,2 @@
 # https://github.com/github/linguist/blob/master/docs/overrides.md
-*.in linguist-language=python
-index.ipynb linguist-vendored
+*.ipynb linguist-language=fsharp
