@@ -12,15 +12,16 @@ RUN dotnet --info && dotnet tool install Microsoft.dotnet-interactive --ignore-f
 #     ${NB_USER}
 
 FROM jupyter/scipy-notebook:python-3.9.13 as JUPYTER
-COPY --from=DOTNET /usr/share/dotnet /usr/share/dotnet
-COPY --from=DOTNET /root/.dotnet /root/.dotnet
+COPY --from=DOTNET /usr/share/dotnet/ /usr/share/dotnet/
+COPY --from=DOTNET /root/.dotnet/ /root/.dotnet/
+RUN find / -name "dotnet"
+ENV DOTNET_ROOT=/usr/share/dotnet
+ENV PATH=$PATH:/root/.dotnet/tools
 ARG NB_USER=jovyan
 ARG NB_UID=1000
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
-ENV DOTNET_ROOT=/usr/share/dotnet
-ENV PATH=$PATH:/root/.dotnet/tools
 USER root
 # COPY ./scripts/profile /tmp/profile
 # # RUN rm -rf ./scripts/profile
@@ -37,6 +38,7 @@ RUN mamba env update -n base --file /tmp/environment.yml \
 # jupyter .NET (C# F# PowerShell) kernel
 RUN export DOTNET_ROOT=/usr/share/dotnet && export PATH=$PATH:/root/.dotnet/tools \
 && dotnet interactive jupyter install
+RUN dotnet interactive jupyter install
 # RUN sudo chmod +x /tmp/dotnet-install.sh
 # RUN /tmp/dotnet-install.sh --channel 7.0
 # # 使用 ENV 持久化环境变量
