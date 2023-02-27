@@ -1,4 +1,13 @@
+# kernel list https://github.com/jupyter/jupyter/wiki/Jupyter-kernels
+
+FROM golang:1.20.1-bullseye as GO
+RUN go install github.com/janpfeifer/gonb@latest \
+&& go install golang.org/x/tools/cmd/goimports@latest \
+&& go install golang.org/x/tools/gopls@latest \
+&& gonb --install
+
 FROM mcr.microsoft.com/dotnet/sdk:7.0 as DOTNET
+COPY --from=GO . .
 # https://learn.microsoft.com/zh-cn/dotnet/core/tools/dotnet-tool-install
 RUN dotnet --info && dotnet tool install Microsoft.dotnet-interactive --global
 
