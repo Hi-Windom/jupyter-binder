@@ -14,7 +14,7 @@ RUN dotnet --info && dotnet tool install Microsoft.dotnet-interactive --ignore-f
 FROM jupyter/scipy-notebook:python-3.9.13 as JUPYTER
 COPY --from=DOTNET /usr/share/dotnet/ /usr/share/dotnet/
 COPY --from=DOTNET /root/.dotnet/ /root/.dotnet/
-RUN find / -name "dotnet"
+RUN sudo find / -type f -name "dotnet"
 ENV DOTNET_ROOT=/usr/share/dotnet
 ENV PATH=$PATH:/root/.dotnet/tools
 ARG NB_USER=jovyan
