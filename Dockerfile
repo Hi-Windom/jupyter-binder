@@ -52,10 +52,11 @@ ARG NB_UID=1000
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
-RUN adduser --disabled-password \
-    --gecos "Default user" \
-    --uid ${NB_UID} \
-    ${NB_USER}
+# from=JUPYTER 已存在 jovyan 用户
+# RUN adduser --disabled-password \
+#     --gecos "Default user" \
+#     --uid ${NB_UID} \
+#     ${NB_USER}
 USER ${NB_USER}
 RUN export PATH="$PATH:/home/jovyan/.dotnet/tools" \
 && dotnet tool install Microsoft.dotnet-interactive --ignore-failed-sources --global && dotnet interactive jupyter install
