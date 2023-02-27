@@ -17,7 +17,7 @@ COPY --from=DOTNET /usr/share/dotnet/ /usr/share/dotnet/
 COPY --from=DOTNET /root/.dotnet/ /root/.dotnet/
 RUN sudo find / -type f -name "dotnet"
 ENV DOTNET_ROOT=/usr/share/dotnet
-ENV PATH=$PATH:/root/.dotnet/tools
+ENV PATH=$PATH:/usr/share/dotnet:/root/.dotnet/tools
 ARG NB_USER=jovyan
 ARG NB_UID=1000
 ENV USER ${NB_USER}
