@@ -1,10 +1,5 @@
 # kernel list https://github.com/jupyter/jupyter/wiki/Jupyter-kernels
 
-FROM rust:1.67.1-alpine3.17 as RUST
-RUN rustup install stable
-# RUN find / -type f -name "cargo" && find / -type f -name "rustc" && find / -type f -name "rustup" && printenv CARGO_HOME && printenv RUSTUP_HOME
-
-
 FROM golang:1.20.1-bullseye as GO
 # debian env
 RUN go env
@@ -26,20 +21,15 @@ ENV HOME=/home/${NB_USER}
 #     --uid ${NB_UID} \
 #     ${NB_USER}
 USER root
-COPY --from=RUST /usr/local/cargo /home/jovyan/.cargo
-COPY --from=RUST /usr/local/rustup /usr/local/rustup
 COPY --from=GO /go /go
 COPY --from=GO /usr/local/go /usr/local/go
 ENV GOVERSION="go1.20.1" GCCGO="gccgo" GOENV=/home/${NB_USER}/.config/go/env GOROOT=/usr/local/go GOPATH=/go GOMODCACHE=/go/pkg/mod GOTOOLDIR=/usr/local/go/pkg/tool/linux_amd64
 COPY --from=DOTNET /usr/share/dotnet/ /usr/share/dotnet/
 COPY --from=DOTNET /root/.dotnet/ /home/${NB_USER}/.dotnet/
 # RUN sudo find / -type f -name "dotnet"
-ENV DOTNET_ROOT=/usr/share/dotnet RUSTUP_HOME=/usr/local/rustup CARGO_HOME=/home/jovyan/.cargo
+ENV DOTNET_ROOT=/usr/share/dotnet
 # PATH 单列项
-ENV PATH=$PATH:/home/jovyan/.cargo/bin/:/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-musl/bin/:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/:/usr/local/go/bin/:/go/bin/
-# jupyter Rust kernel
-RUN cargo install evcxr_jupyter && find / -type f -name "evcxr_jupyter" \
-&& rustup component add rust-src && evcxr_jupyter --install
+ENV PATH=$PATH:/usr/share/dotnet/:/home/${NB_USER}/.dotnet/tools/:/usr/local/go/bin/:/go/bin/
 # jupyter .NET (C# F# PowerShell) kernel
 RUN dotnet interactive jupyter install
 # jupyter GO kernel
@@ -69,8 +59,8 @@ RUN pip install digautoprofiler -q \
 # jupyter node.js kernel
 # RUN npm install -g npm@9.5.1 # npm ERR! engine Not compatible with your version of node/npm: npm@9.5.1
 RUN npm install uuid@9.0.0 \
-&& npm install -g ijavascript@5.2.1 \
-&& ijsinstall
+&& npm install -g ijavascript@5.2.1 && ijsinstall \
+&& npm install -g tslab && tslab install --version && tslab install [--python=python3]
 # auto run initial work
 RUN nbdime config-git --enable --global \
 && conda init
