@@ -4,7 +4,7 @@
 
 此仓库托管在 [Github](https://github.com/Hi-Windom/jupyter-binder) ，是一八六战略二期工程项目，绛亽新学习融创示范项目
 
-姊妹仓库：[jupyter-binder-python](https://github.com/Hi-Windom/jupyter-binder-python) 体积小巧，对于仅需要 IPython 内核和基本 Lab 插件的需求来说非常适合
+姊妹仓库：[jupyter-binder-python](https://github.com/Hi-Windom/jupyter-binder-python) 体积小巧，对于仅需要 ipykernel 和基本 Lab 插件的需求来说非常适合
 
 其开源贡献包括两大方面：
 
@@ -23,6 +23,10 @@
 > 4. [IJavascript](https://github.com/n-riesco/ijavascript)
 >
 > 是否考虑集成 C++ 内核？不会考虑，C++ 并不适合 notebook ，集成的意义不明显
+>
+> 已内置以下插件：
+>
+> *作者很懒，这里什么也没写*
 
 打开链接 [快速开始](https://mybinder.org/v2/gh/Hi-Windom/jupyter-binder/HEAD?urlpath=lab/tree/binder.ipynb)
 

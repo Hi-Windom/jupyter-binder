@@ -50,7 +50,9 @@ RUN mamba env update -n base --file /tmp/environment.yml \
 # ignore warn, can not work if use sudo -H
 RUN pip install digautoprofiler -q \
 && pip install jupyter-wysiwyg -q \
-&& pip install nbtools -q
+&& pip install nbtools -q \
+&& pip install jupyterlab_rise
+# ref https://github.com/damianavila/RISE/pull/605#issuecomment-1345599744
 #
 # nbgitpuller 用于内容仓库与环境仓库分离
 # 暂不可用 https://github.com/jupyterhub/nbgitpuller/issues/292
