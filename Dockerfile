@@ -60,7 +60,7 @@ RUN pip install digautoprofiler -q \
 # RUN npm install -g npm@9.5.1 # npm ERR! engine Not compatible with your version of node/npm: npm@9.5.1
 RUN npm install uuid@9.0.0 \
 && npm install -g ijavascript@5.2.1 && ijsinstall \
-&& npm install -g tslab && tslab install --version && tslab install [--python=python3]
+&& npm install -g tslab && tslab install --version && tslab install --python=python3
 # auto run initial work
 RUN nbdime config-git --enable --global \
 && conda init
