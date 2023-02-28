@@ -50,8 +50,7 @@ RUN mamba env update -n base --file /tmp/environment.yml \
 # ignore warn, can not work if use sudo -H
 RUN pip install digautoprofiler -q \
 && pip install jupyter-wysiwyg -q \
-&& pip install nbtools -q \
-&& pip cache purge
+&& pip install nbtools -q
 #
 # nbgitpuller 用于内容仓库与环境仓库分离
 # 暂不可用 https://github.com/jupyterhub/nbgitpuller/issues/292
@@ -62,8 +61,7 @@ RUN pip install digautoprofiler -q \
 RUN npm install uuid@9.0.0 \
 && npm install -g ijavascript@5.2.1 && ijsinstall \
 && npm install -g tslab && tslab install --version && tslab install --python=python3 \
-&& npm install -g typescript-language-server typescript \
-&& npm cache clean --force
+&& npm install -g typescript-language-server typescript
 # auto run initial work
 RUN nbdime config-git --enable --global \
 && conda init
