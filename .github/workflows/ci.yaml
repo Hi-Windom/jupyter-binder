@@ -28,6 +28,7 @@ jobs:
         BINDER_CACHE: true # 写入 binder/Dockerfile
         PUBLIC_REGISTRY_CHECK: true # 检查是否是公开的镜像服务
         MYBINDERORG_TAG: ${{ github.event.inputs.tag }}
+        ADDITIONAL_TAG: ${{ github.event.inputs.tag }} # 注意：binder 始终使用哈希 TAG ，请勿在 docker hub 删除 /binder/Dockerfile 对应的哈希 TAG
 
   create_release:
     name: Create Release
