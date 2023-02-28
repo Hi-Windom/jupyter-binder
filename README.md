@@ -13,7 +13,12 @@
 
 ## 在 [Binder (mybinder.org)](https://mybinder.org/) 使用
 
-> 已集成 .NET 和 node.js 内核
+> 已集成以下内核：
+>
+> 1. [.Net Interactive](https://github.com/dotnet/interactive/)
+> 2. [GoNB](https://github.com/janpfeifer/gonb)
+> 3. [tslab](https://github.com/yunabe/tslab)
+> 4. [IJavascript](https://github.com/n-riesco/ijavascript)
 >
 > 是否考虑集成 C++ 内核？不会考虑，C++ 并不适合 notebook ，集成的意义不明显
 
