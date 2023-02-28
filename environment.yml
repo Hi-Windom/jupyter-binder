@@ -12,7 +12,9 @@ dependencies:
 - jupyterlab-git # lab ext
 - jupyter-archive # lab ext
 - jupyterlab-lsp  # lab ext
-- jedi-language-server  # lab ext dep
+# - jedi-language-server  # python lsp
+- python-lsp-server # instead of jedi-language-server
+- pyls-memestra # python-lsp-server plugin
 # - xeus-cling # c++ kernel, do not need and can not work
 #>>> extend list
 - hiplot

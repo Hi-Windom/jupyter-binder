@@ -42,15 +42,15 @@ astor==0.8.1
     # via pandasgui
 asttokens==2.2.1
     # via stack-data
+astunparse==1.6.3
+    # via scalene
 async-timeout==4.0.2
     # via aiohttp
 attrs==22.2.0
     # via
     #   aiohttp
     #   automat
-    #   cattrs
     #   jsonschema
-    #   lsprotocol
     #   service-identity
     #   twisted
 automat==22.10.0
@@ -66,6 +66,8 @@ beautifulsoup4==4.11.2
     #   google
     #   hiplot
     #   nbconvert
+beniget==0.4.1
+    # via memestra
 bleach==6.0.0
     # via nbconvert
 botocore==1.27.59
@@ -74,8 +76,6 @@ brotli==1.0.9
     # via flask-compress
 bs4==0.0.1
     # via pyinspect
-cattrs==22.2.0
-    # via lsprotocol
 certifi==2022.12.7
     # via requests
 cffi==1.15.1
@@ -124,23 +124,23 @@ decorator==5.1.1
     # via ipython
 defusedxml==0.7.1
     # via nbconvert
+deprecated==1.2.13
+    # via pyls-memestra
 deprecation==2.1.0
     # via jupyter-packaging
 digautoprofiler==0.2.8
     # via -r win.requirements.in
 docstring-to-markdown==0.11
-    # via jedi-language-server
+    # via python-lsp-server
 entrypoints==0.4
     # via
     #   altair
     #   jupyter-lsp
-exceptiongroup==1.1.0
-    # via cattrs
 executing==1.2.0
     # via stack-data
 fastapi==0.92.0
     # via -r win.requirements.in
-fastjsonschema==2.16.2
+fastjsonschema==2.16.3
     # via nbformat
 filelock==3.9.0
     # via tldextract
@@ -154,6 +154,8 @@ fonttools==4.38.0
     # via matplotlib
 fqdn==1.5.1
     # via jsonschema
+frilouz==0.0.2
+    # via memestra
 frozenlist==1.3.3
     # via
     #   aiohttp
@@ -162,6 +164,10 @@ fsspec==2023.1.0
     # via
     #   jupyter-scheduler
     #   s3fs
+gast==0.5.3
+    # via
+    #   beniget
+    #   memestra
 gitdb==4.0.10
     # via gitpython
 gitpython==3.1.31
@@ -231,9 +237,7 @@ itsdangerous==2.1.2
 jedi==0.18.2
     # via
     #   ipython
-    #   jedi-language-server
-jedi-language-server==0.40.0
-    # via -r win.requirements.in
+    #   python-lsp-server
 jinja2==3.1.2
     # via
     #   altair
@@ -288,7 +292,7 @@ jupyter-lsp==1.5.1
     # via jupyterlab-lsp
 jupyter-packaging==0.12.3
     # via nbtools
-jupyter-scheduler==1.2.0
+jupyter-scheduler==1.3.1
     # via -r win.requirements.in
 jupyter-server==2.3.0
     # via
@@ -351,10 +355,6 @@ jupyterspot==0.4.0
     # via -r win.requirements.in
 kiwisolver==1.4.4
     # via matplotlib
-lsprotocol==2022.0.0a10
-    # via
-    #   jedi-language-server
-    #   pygls
 lxml==4.9.2
     # via
     #   parsel
@@ -378,6 +378,8 @@ matplotlib-inline==0.1.6
     #   ipython
 mdurl==0.1.2
     # via markdown-it-py
+memestra==0.2.1
+    # via pyls-memestra
 mistune==2.0.5
     # via nbconvert
 mpmath==1.2.1
@@ -396,6 +398,7 @@ nbconvert==7.2.9
     # via
     #   jupyter-scheduler
     #   jupyter-server
+    #   memestra
     #   nbclassic
     #   notebook
 nbdime==3.1.1
@@ -407,12 +410,13 @@ nbformat==5.7.3
     #   ipywidgets
     #   jupyter-server
     #   jupyterlab-git
+    #   memestra
     #   nbclassic
     #   nbclient
     #   nbconvert
     #   nbdime
     #   notebook
-nbtools==23.1.0
+nbtools==23.1.1
     # via -r win.requirements.in
 nest-asyncio==1.5.6
     # via
@@ -483,6 +487,8 @@ platformdirs==3.0.0
     # via jupyter-core
 plotly==5.13.1
     # via pandasgui
+pluggy==1.0.0
+    # via python-lsp-server
 prometheus-client==0.16.0
     # via
     #   jupyter-server
@@ -513,12 +519,9 @@ pycparser==2.21
 pydantic==1.10.5
     # via
     #   fastapi
-    #   jedi-language-server
     #   jupyter-scheduler
 pydispatcher==2.0.7
     # via scrapy
-pygls==1.0.1
-    # via jedi-language-server
 pygments==2.14.0
     # via
     #   ipython
@@ -526,6 +529,8 @@ pygments==2.14.0
     #   nbdime
     #   rich
 pyinspect==0.1.0
+    # via -r win.requirements.in
+pyls-memestra==0.0.16
     # via -r win.requirements.in
 pynput==1.7.6
     # via pandasgui
@@ -563,6 +568,12 @@ python-dateutil==2.8.2
     #   pandas
 python-json-logger==2.0.7
     # via jupyter-events
+python-lsp-jsonrpc==1.0.0
+    # via python-lsp-server
+python-lsp-server==1.7.1
+    # via
+    #   -r win.requirements.in
+    #   pyls-memestra
 pytz==2022.7.1
     # via
     #   babel
@@ -578,7 +589,9 @@ pywinpty==2.0.10
     #   jupyter-server-terminals
     #   terminado
 pyyaml==6.0
-    # via jupyter-events
+    # via
+    #   jupyter-events
+    #   memestra
 pyzmq==25.0.0
     # via
     #   ipykernel
@@ -615,7 +628,7 @@ rich==13.3.1
     #   scalene
 s3fs==2023.1.0
     # via jupyter-scheduler
-scalene==1.5.19
+scalene==1.5.20
     # via -r win.requirements.in
 scipy==1.10.1
     # via -r win.requirements.in
@@ -633,6 +646,7 @@ service-identity==21.1.0
 six==1.16.0
     # via
     #   asttokens
+    #   astunparse
     #   automat
     #   bleach
     #   protego
@@ -708,13 +722,15 @@ twisted==22.10.0
     # via scrapy
 twisted-iocpsupport==1.0.2
     # via twisted
-typeguard==2.13.3
-    # via pygls
 typing-extensions==4.5.0
     # via
     #   pandasgui
     #   pydantic
     #   twisted
+ujson==5.7.0
+    # via
+    #   python-lsp-jsonrpc
+    #   python-lsp-server
 uri-template==1.2.0
     # via jsonschema
 urllib3==1.26.14
@@ -740,14 +756,17 @@ werkzeug==2.2.3
     # via flask
 wheel==0.38.4
     # via
+    #   astunparse
     #   jupyter-packaging
     #   scalene
 widgetsnbextension==3.5.2
     # via ipywidgets
 wordcloud==1.8.2.2
     # via pandasgui
-wrapt==1.14.1
-    # via aiobotocore
+wrapt==1.15.0
+    # via
+    #   aiobotocore
+    #   deprecated
 y-py==0.5.9
     # via
     #   jupyter-ydoc

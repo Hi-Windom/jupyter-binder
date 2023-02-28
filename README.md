@@ -4,8 +4,6 @@
 
 此仓库托管在 [Github](https://github.com/Hi-Windom/jupyter-binder) ，是一八六战略二期工程项目，绛亽新学习融创示范项目
 
-基于 Binder 实现，任意 ipynb 公开仓库可 [在线生成链接](https://hub.jupyter.org/nbgitpuller/link?tab=binder)
-
 其开源贡献包括两大方面：
 
 1. 提供一个开箱即用的在线 Jupyter Lab 环境
