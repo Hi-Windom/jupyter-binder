@@ -31,6 +31,8 @@
 
 基于 Binder 实现，可以在 `Dockerfile` 中 `FROM soltus/jupyter-binder:latest` 开始构建自定义的环境镜像
 
+更多内容参考 [binder.ipynb](https://github.com/Hi-Windom/jupyter-binder/blob/main/binder.ipynb)
+
 ## 在 Windows 本地复苏
 
 > 如果需要镜像加速下载，请参考 [Python镜像 (yuque.com)](https://www.yuque.com/cnbc/py3/image)
