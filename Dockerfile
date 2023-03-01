@@ -55,10 +55,11 @@ RUN mamba env update -n base --file /tmp/environment.yml \
 RUN pip install digautoprofiler -q \
 && pip install jupyter-wysiwyg -q \
 && pip install nbtools -q \
-&& pip install jupyterlab_rise
+&& pip install jupyterlab_rise -q \
+&& pip install nbgitpuller -q
 # ref https://github.com/damianavila/RISE/pull/605#issuecomment-1345599744
 #
-# nbgitpuller 用于内容仓库与环境仓库分离
+# nbgitpuller 用于内容仓库与环境仓库分离，需要 git 环境
 # 暂不可用 https://github.com/jupyterhub/nbgitpuller/issues/292
 # RUN pip install nbgitpuller -q
 #
