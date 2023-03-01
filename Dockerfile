@@ -40,6 +40,7 @@ RUN go install github.com/janpfeifer/gonb@latest \
 COPY environment.yml /tmp/environment.yml
 COPY .gitignore.txt /home/${NB_USER}/.gitignore
 RUN sudo rm -rf environment.yml \
+&& sudo rm -rf .gitignore \
 && sudo rm -rf .gitignore.txt \
 && sudo rm -rf /home/${NB_USER}/work
 # 注意顺序
