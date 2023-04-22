@@ -73,4 +73,5 @@ RUN npm install uuid@9.0.0 \
 RUN nbdime config-git --enable --global \
 && conda init
 RUN chown -R ${NB_UID} ${HOME}
+CMD ["sh", "-c", "git remote remove origin"]
 USER ${NB_USER}
