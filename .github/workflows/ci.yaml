@@ -7,7 +7,8 @@ on:
         required: true
         default: "v"
       tag:
-        description: 'docker binder MYBINDERORG_TAG'
+        description: 'docker binder MYBINDERORG_TAG (一般与version保持一致即可)'
+        default: "v"
         required: true
 
 jobs:
