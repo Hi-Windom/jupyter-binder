@@ -51,6 +51,7 @@ pandas
 pandasgui
 Pillow
 hiplot
+jieba
   ## 网络工具常用包
 requests
 beautifulsoup4

@@ -232,6 +232,8 @@ jedi==0.18.2
     # via
     #   ipython
     #   python-lsp-server
+jieba==0.42.1
+    # via -r win.requirements.in
 jinja2==3.1.2
     # via
     #   altair
