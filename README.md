@@ -66,6 +66,8 @@ jupyter lab --port='6969' --ip='*' --no-browser --allow-root --notebook-dir='D:\
 
 --notebook-dir 传参因人而异，不出意外的话复苏成功。在终端 CTRL + 单击链接或者手动打开浏览器访问 [http://127.0.0.1:6969/lab](http://127.0.0.1:6969/lab) ，时间交给你了
 
+可以使用 `pip list --outdated` 检查过时的包
+
 # 初始化工作
 
 参考 [index.ipynb](https://github.com/Hi-Windom/jupyter-binder/blob/main/index.ipynb)

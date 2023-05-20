@@ -1,10 +1,11 @@
-#>>>   ÍêÕûµÄ Windows AMD64 ÒÀÀµ°üÇåµ¥   <<<#
+#>>>   Complete Windows AMD64 dependency package manifest   <<<#
+#>>>   Hi-Windom 2023  |  QQ: 694357845                     <<<#
 
 ##########################################################################
-################################ »ù´¡»·¾³ ################################
+############################ Base environment ############################
 ##########################################################################
 jupyterlab
-  # lab ºËĞÄ²å¼ş
+  ## Lab core plugin
 jupyterlab-language-pack-zh-CN
 jupyterlab-git
 ipywidgets==7.6.6
@@ -14,7 +15,7 @@ ipympl
 nbdime
 jupyter-wysiwyg
 jupyter-archive
-      #>>> python-lsp-server £¨@krassowski/jupyterlab-lsp£© Ã²ËÆºÍ jupyterlab-lsp Ò»Ñù¡£µ«ÊÇ½ûÓÃºÍĞ¶ÔØ²»·½±ã
+      #>>> python-lsp-server ï¼ˆ@krassowski/jupyterlab-lspï¼‰ seems to be the same as jupyterlab-lsp.
 jupyterlab-lsp
 python-lsp-server
       #>>> instead of jedi-language-server
@@ -25,23 +26,21 @@ jupyterlab-recents
 jupyterlab-cell-flash
 jupyterlab_execute_time
 jupyterspot
-  # lab ²å¼ş
 jupyter_scheduler
 jupyterlab_pygments
 jupyterlab_templates
 ipyuploads
 ipycytoscape
-  # ÊµÓÃ¹¤¾ß°ü
+  # Practical toolkit
 rich
 dearpygui
 scalene
 pyinspect
 
 ##########################################################################
-################################ À©Õ¹»·¾³ ################################
+######################### Extended environment ###########################
 ##########################################################################
-  # ÒµÎñ°ü
-  ## Êı¾İ·ÖÎöÓë¿ÉÊÓ»¯³£ÓÃ°ü
+  ## Common packages for data analysis and visualization
 numpy
 sympy
 scipy
@@ -52,7 +51,7 @@ pandasgui
 Pillow
 hiplot
 jieba
-  ## ÍøÂç¹¤¾ß³£ÓÃ°ü
+  ## Commonly used packages for network tools
 requests
 beautifulsoup4
 fastapi
