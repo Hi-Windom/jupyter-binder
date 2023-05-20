@@ -245,6 +245,7 @@ jinja2==3.1.2
     #   nbconvert
     #   nbdime
     #   notebook
+    #   pyecharts
     #   scalene
 jmespath==1.0.1
     # via
@@ -286,7 +287,9 @@ jupyter-events==0.6.3
     #   jupyter-server
     #   jupyter-server-fileid
 jupyter-lsp==2.1.0
-    # via jupyterlab-lsp
+    # via
+    #   jupyterlab
+    #   jupyterlab-lsp
 jupyter-scheduler==1.3.2
     # via -r win.requirements.in
 jupyter-server==2.5.0
@@ -423,7 +426,9 @@ notebook==6.5.4
     #   jupyterlab
     #   widgetsnbextension
 notebook-shim==0.2.3
-    # via nbclassic
+    # via
+    #   jupyterlab
+    #   nbclassic
 numpy==1.24.3
     # via
     #   -r win.requirements.in
@@ -483,6 +488,8 @@ plotly==5.14.1
     # via pandasgui
 pluggy==1.0.0
     # via python-lsp-server
+prettytable==3.7.0
+    # via pyecharts
 prometheus-client==0.16.0
     # via
     #   jupyter-server
@@ -517,6 +524,8 @@ pydantic==1.10.7
     #   jupyter-scheduler
 pydispatcher==2.0.7
     # via scrapy
+pyecharts==2.0.3
+    # via -r win.requirements.in
 pygments==2.15.1
     # via
     #   ipython
@@ -637,6 +646,8 @@ send2trash==1.8.2
     #   notebook
 service-identity==21.1.0
     # via scrapy
+simplejson==3.19.1
+    # via pyecharts
 six==1.16.0
     # via
     #   asttokens
@@ -716,6 +727,7 @@ twisted-iocpsupport==1.0.3
 typing-extensions==4.5.0
     # via
     #   altair
+    #   async-lru
     #   pandasgui
     #   pydantic
     #   twisted
@@ -737,7 +749,9 @@ w3lib==2.1.1
     #   parsel
     #   scrapy
 wcwidth==0.2.6
-    # via prompt-toolkit
+    # via
+    #   prettytable
+    #   prompt-toolkit
 webcolors==1.13
     # via jsonschema
 webencodings==0.5.1

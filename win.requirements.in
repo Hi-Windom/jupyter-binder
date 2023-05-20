@@ -57,3 +57,4 @@ beautifulsoup4
 fastapi
 aiohttp
 Scrapy
+pyecharts
