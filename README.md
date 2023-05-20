@@ -27,8 +27,6 @@
 
 假如你有一个远端仓库（比如 Github），使用 [克隆](https://mybinder.org/v2/gh/Hi-Windom/jupyter-binder/HEAD?urlpath=lab/tree/loader.ipynb) 链接；如果只是想运行单个文件，直接从本地上传是最好的选择，也可以从 URL 打开。
 
-~~任意 ipynb 公开仓库可 [在线生成链接](https://hub.jupyter.org/nbgitpuller/link?tab=binder) ，而无需提供额外配置~~（暂不可用，故障排查中）
-
 基于 Binder 实现，可以在 `Dockerfile` 中 `FROM soltus/jupyter-binder:latest` 开始构建自定义的环境镜像
 
 更多内容参考 [binder.ipynb](https://github.com/Hi-Windom/jupyter-binder/blob/main/binder.ipynb)
@@ -41,32 +39,7 @@
 >
 > 非 Python 内核需自行安装
 
-前置准备：
-
-1. `conda info -e` 命令应对输出而不是报错
-
-在 README.md 文件所在路径打开终端，运行以下命令：(应当使用 PowerShell 而不是 CMD 以避免意外发生)
-
-```powershell
-conda create -n lab python=3.10
-conda actiavte lab
-```
-
-```powershell
-pip install pip-tools -i https://mirrors.tencent.com/pypi/simple
-```
-
-```powershell
-pip-sync win.requirements.txt --pip-args "--quiet --retries 10 --timeout 30"
-```
-
-```powershell
-jupyter lab --port='6969' --ip='*' --no-browser --allow-root --notebook-dir='D:\\TEMP\\jlab\\notebook'
-```
-
---notebook-dir 传参因人而异，不出意外的话复苏成功。在终端 CTRL + 单击链接或者手动打开浏览器访问 [http://127.0.0.1:6969/lab](http://127.0.0.1:6969/lab) ，时间交给你了
-
-可以使用 `pip list --outdated` 检查过时的包
+参考 [index.ipynb](https://github.com/Hi-Windom/jupyter-binder/blob/main/index.ipynb)
 
 # 初始化工作
 
