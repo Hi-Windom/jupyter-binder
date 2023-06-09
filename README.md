@@ -4,7 +4,7 @@
 
 此仓库托管在 [Github](https://github.com/Hi-Windom/jupyter-binder) ，是一八六战略二期工程项目，绛亽新学习融创示范项目
 
-姊妹仓库：[jupyter-binder-python](https://github.com/Hi-Windom/jupyter-binder-python) 体积小巧，对于仅需要 ipykernel 和基本 Lab 插件的需求来说非常适合
+姊妹仓库：[jupyter-binder-python](https://github.com/Hi-Windom/jupyter-binder-python) 体积小巧，对于仅需要 ipykernel 和基本 Lab 插件的需求来说非常适合，不过更新频率较慢
 
 # 使用
 
