@@ -33,7 +33,7 @@
 
 ## 在 Windows 本地复苏
 
-> 如果需要镜像加速下载，请参考 [Python镜像 (yuque.com)](https://www.yuque.com/cnbc/py3/image)
+> 如果需要镜像加速下载，请参考 [Python镜像](https://flowus.cn/hi-windom/share/cce132f4-d80d-4214-928c-201627ce29f7)
 >
 > 只考虑 windows AMD64 平台
 >
