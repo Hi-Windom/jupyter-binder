@@ -8,7 +8,7 @@
 
 # 使用
 
-## 在 [Binder (mybinder.org)](https://mybinder.org/) 使用
+## 在 Binder (mybinder.org) 使用
 
 > 已集成以下内核：
 >
@@ -25,7 +25,7 @@
 
 打开链接 [快速开始](https://mybinder.org/v2/gh/Hi-Windom/jupyter-binder/HEAD?urlpath=lab/tree/binder.ipynb)
 
-假如你有一个远端仓库（比如 Github），使用 [克隆](https://mybinder.org/v2/gh/Hi-Windom/jupyter-binder/HEAD?urlpath=lab/tree/loader.ipynb) 链接；如果只是想运行单个文件，直接从本地上传是最好的选择，也可以从 URL 打开。
+假如你有一个远端仓库（比如 Github repo），使用 [克隆](https://mybinder.org/v2/gh/Hi-Windom/jupyter-binder/HEAD?urlpath=lab/tree/loader.ipynb) 链接；如果只是想运行单个文件，直接从本地上传是最好的选择，也可以从 URL 打开。
 
 基于 Binder 实现，可以在 `Dockerfile` 中 `FROM soltus/jupyter-binder:latest` 开始构建自定义的环境镜像
 
