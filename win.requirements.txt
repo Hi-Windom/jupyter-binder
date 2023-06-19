@@ -21,9 +21,9 @@ aiosignal==1.3.1
     # via aiohttp
 aiosqlite==0.19.0
     # via ypy-websocket
-altair==5.0.0
+altair==5.0.1
     # via digautoprofiler
-anyio==3.6.2
+anyio==3.7.0
     # via
     #   jupyter-server
     #   starlette
@@ -101,11 +101,11 @@ comm==0.1.3
     # via ipykernel
 constantly==15.1.0
     # via twisted
-contourpy==1.0.7
+contourpy==1.1.0
     # via matplotlib
-croniter==1.3.14
+croniter==1.4.1
     # via jupyter-scheduler
-cryptography==40.0.2
+cryptography==41.0.1
     # via
     #   pyopenssl
     #   scrapy
@@ -124,19 +124,21 @@ decorator==5.1.1
     # via ipython
 defusedxml==0.7.1
     # via nbconvert
-deprecated==1.2.13
+deprecated==1.2.14
     # via pyls-memestra
-digautoprofiler==1.0.1
+digautoprofiler==1.0.2
     # via -r win.requirements.in
 docstring-to-markdown==0.12
     # via python-lsp-server
+exceptiongroup==1.1.1
+    # via anyio
 executing==1.2.0
     # via stack-data
-fastapi==0.95.1
+fastapi==0.97.0
     # via -r win.requirements.in
-fastjsonschema==2.16.3
+fastjsonschema==2.17.1
     # via nbformat
-filelock==3.12.0
+filelock==3.12.2
     # via tldextract
 flask==2.3.2
     # via
@@ -144,7 +146,7 @@ flask==2.3.2
     #   hiplot
 flask-compress==1.13
     # via hiplot
-fonttools==4.39.4
+fonttools==4.40.0
     # via matplotlib
 fqdn==1.5.1
     # via jsonschema
@@ -154,7 +156,7 @@ frozenlist==1.3.3
     # via
     #   aiohttp
     #   aiosignal
-fsspec==2023.5.0
+fsspec==2023.6.0
     # via
     #   jupyter-scheduler
     #   s3fs
@@ -186,14 +188,14 @@ incremental==22.10.0
     # via twisted
 ipycytoscape==1.3.3
     # via -r win.requirements.in
-ipykernel==6.23.1
+ipykernel==6.23.2
     # via
     #   ipywidgets
     #   nbclassic
     #   notebook
 ipympl==0.9.3
     # via -r win.requirements.in
-ipython==8.13.2
+ipython==8.14.0
     # via
     #   hiplot
     #   ipykernel
@@ -252,9 +254,11 @@ jmespath==1.0.1
     #   botocore
     #   itemloaders
     #   parsel
+joblib==1.2.0
+    # via scikit-learn
 json5==0.9.14
     # via jupyterlab-server
-jsonpointer==2.3
+jsonpointer==2.4
     # via jsonschema
 jsonschema[format-nongpl]==4.17.3
     # via
@@ -271,7 +275,7 @@ jupyter-client==8.2.0
     #   nbclassic
     #   nbclient
     #   notebook
-jupyter-core==5.3.0
+jupyter-core==5.3.1
     # via
     #   ipykernel
     #   jupyter-client
@@ -286,13 +290,13 @@ jupyter-events==0.6.3
     # via
     #   jupyter-server
     #   jupyter-server-fileid
-jupyter-lsp==2.1.0
+jupyter-lsp==2.2.0
     # via
     #   jupyterlab
     #   jupyterlab-lsp
 jupyter-scheduler==1.3.2
     # via -r win.requirements.in
-jupyter-server==2.5.0
+jupyter-server==2.6.0
     # via
     #   jupyter-archive
     #   jupyter-lsp
@@ -320,7 +324,7 @@ jupyter-ydoc==0.2.4
     # via
     #   jupyter-server-ydoc
     #   jupyterlab
-jupyterlab==3.6.3
+jupyterlab==3.6.4
     # via
     #   -r win.requirements.in
     #   jupyter-wysiwyg
@@ -329,13 +333,13 @@ jupyterlab==3.6.3
     #   nbtools
 jupyterlab-cell-flash==0.3.5
     # via -r win.requirements.in
-jupyterlab-execute-time==2.3.1
+jupyterlab-execute-time==3.0.0
     # via -r win.requirements.in
 jupyterlab-git==0.41.0
     # via -r win.requirements.in
-jupyterlab-language-pack-zh-cn==3.6.post1
+jupyterlab-language-pack-zh-cn==4.0.post0
     # via -r win.requirements.in
-jupyterlab-lsp==4.1.0
+jupyterlab-lsp==4.2.0
     # via -r win.requirements.in
 jupyterlab-pygments==0.2.2
     # via
@@ -343,7 +347,7 @@ jupyterlab-pygments==0.2.2
     #   nbconvert
 jupyterlab-recents==3.2.0
     # via -r win.requirements.in
-jupyterlab-server==2.22.1
+jupyterlab-server==2.23.0
     # via jupyterlab
 jupyterlab-templates==0.4.0
     # via -r win.requirements.in
@@ -357,9 +361,9 @@ lxml==4.9.2
     # via
     #   parsel
     #   scrapy
-markdown-it-py==2.2.0
+markdown-it-py==3.0.0
     # via rich
-markupsafe==2.1.2
+markupsafe==2.1.3
     # via
     #   jinja2
     #   nbconvert
@@ -390,9 +394,9 @@ nbclassic==1.0.0
     # via
     #   jupyterlab
     #   notebook
-nbclient==0.7.4
+nbclient==0.8.0
     # via nbconvert
-nbconvert==7.4.0
+nbconvert==7.5.0
     # via
     #   jupyter-scheduler
     #   jupyter-server
@@ -403,7 +407,7 @@ nbdime==3.2.1
     # via
     #   -r win.requirements.in
     #   jupyterlab-git
-nbformat==5.8.0
+nbformat==5.9.0
     # via
     #   ipywidgets
     #   jupyter-server
@@ -429,7 +433,7 @@ notebook-shim==0.2.3
     # via
     #   jupyterlab
     #   nbclassic
-numpy==1.24.3
+numpy==1.25.0
     # via
     #   -r win.requirements.in
     #   altair
@@ -440,9 +444,12 @@ numpy==1.24.3
     #   pandasgui
     #   pyarrow
     #   pyinspect
+    #   scikit-learn
     #   scipy
     #   seaborn
     #   wordcloud
+overrides==7.3.1
+    # via jupyter-server
 packaging==23.1
     # via
     #   ipykernel
@@ -455,7 +462,7 @@ packaging==23.1
     #   parsel
     #   plotly
     #   scrapy
-pandas==2.0.1
+pandas==2.0.2
     # via
     #   -r win.requirements.in
     #   altair
@@ -482,15 +489,15 @@ pillow==9.5.0
     #   ipympl
     #   matplotlib
     #   wordcloud
-platformdirs==3.5.1
+platformdirs==3.6.0
     # via jupyter-core
-plotly==5.14.1
+plotly==5.15.0
     # via pandasgui
 pluggy==1.0.0
     # via python-lsp-server
-prettytable==3.7.0
+prettytable==3.8.0
     # via pyecharts
-prometheus-client==0.16.0
+prometheus-client==0.17.0
     # via
     #   jupyter-server
     #   nbclassic
@@ -508,7 +515,7 @@ ptyprocess==0.7.0
     # via pexpect
 pure-eval==0.2.2
     # via stack-data
-pyarrow==12.0.0
+pyarrow==12.0.1
     # via pandasgui
 pyasn1==0.5.0
     # via
@@ -518,7 +525,7 @@ pyasn1-modules==0.3.0
     # via service-identity
 pycparser==2.21
     # via cffi
-pydantic==1.10.7
+pydantic==1.10.9
     # via
     #   fastapi
     #   jupyter-scheduler
@@ -540,9 +547,9 @@ pynput==1.7.6
     # via pandasgui
 pynvml==11.4.1
     # via scalene
-pyopenssl==23.1.1
+pyopenssl==23.2.0
     # via scrapy
-pyparsing==3.0.9
+pyparsing==3.1.0
     # via matplotlib
 pyqt5==5.15.9
     # via
@@ -595,7 +602,7 @@ pyyaml==6.0
     # via
     #   jupyter-events
     #   memestra
-pyzmq==25.0.2
+pyzmq==25.1.0
     # via
     #   ipykernel
     #   jupyter-client
@@ -606,7 +613,7 @@ qtstylish==0.1.5
     # via pandasgui
 queuelib==1.6.2
     # via scrapy
-requests==2.30.0
+requests==2.31.0
     # via
     #   -r win.requirements.in
     #   jupyterlab-server
@@ -624,17 +631,21 @@ rfc3986-validator==0.1.1
     # via
     #   jsonschema
     #   jupyter-events
-rich==13.3.5
+rich==13.4.2
     # via
     #   -r win.requirements.in
     #   pyinspect
     #   scalene
-s3fs==2023.5.0
+s3fs==2023.6.0
     # via jupyter-scheduler
-scalene==1.5.21.2
+scalene==1.5.21.4
+    # via -r win.requirements.in
+scikit-learn==1.2.2
     # via -r win.requirements.in
 scipy==1.10.1
-    # via -r win.requirements.in
+    # via
+    #   -r win.requirements.in
+    #   scikit-learn
 scrapy==2.9.0
     # via -r win.requirements.in
 seaborn==0.12.2
@@ -644,7 +655,7 @@ send2trash==1.8.2
     #   jupyter-server
     #   nbclassic
     #   notebook
-service-identity==21.1.0
+service-identity==23.1.0
     # via scrapy
 simplejson==3.19.1
     # via pyecharts
@@ -658,7 +669,6 @@ six==1.16.0
     #   python-dateutil
     #   requests-file
     #   rfc3339-validator
-    #   service-identity
 smmap==5.0.0
     # via gitdb
 sniffio==1.3.0
@@ -671,7 +681,7 @@ sqlalchemy==1.4.48
     # via jupyter-scheduler
 stack-data==0.6.2
     # via ipython
-starlette==0.26.1
+starlette==0.27.0
     # via fastapi
 sympy==1.12
     # via -r win.requirements.in
@@ -683,9 +693,11 @@ terminado==0.17.1
     #   jupyter-server-terminals
     #   nbclassic
     #   notebook
+threadpoolctl==3.1.0
+    # via scikit-learn
 tinycss2==1.2.1
     # via nbconvert
-tldextract==3.4.1
+tldextract==3.4.4
     # via scrapy
 tomli==2.0.1
     # via jupyterlab
@@ -724,7 +736,7 @@ twisted==22.10.0
     # via scrapy
 twisted-iocpsupport==1.0.3
     # via twisted
-typing-extensions==4.5.0
+typing-extensions==4.6.3
     # via
     #   altair
     #   async-lru
@@ -733,13 +745,13 @@ typing-extensions==4.5.0
     #   twisted
 tzdata==2023.3
     # via pandas
-ujson==5.7.0
+ujson==5.8.0
     # via
     #   python-lsp-jsonrpc
     #   python-lsp-server
 uri-template==1.2.0
     # via jsonschema
-urllib3==1.26.15
+urllib3==1.26.16
     # via
     #   botocore
     #   requests
@@ -758,15 +770,15 @@ webencodings==0.5.1
     # via
     #   bleach
     #   tinycss2
-websocket-client==1.5.1
+websocket-client==1.6.0
     # via jupyter-server
-werkzeug==2.3.4
+werkzeug==2.3.6
     # via flask
 wheel==0.40.0
     # via scalene
 widgetsnbextension==3.5.2
     # via ipywidgets
-wordcloud==1.9.1.1
+wordcloud==1.9.2
     # via pandasgui
 wrapt==1.15.0
     # via

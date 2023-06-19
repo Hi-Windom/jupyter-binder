@@ -44,3 +44,7 @@
 # 初始化工作
 
 参考 [index.ipynb](https://github.com/Hi-Windom/jupyter-binder/blob/main/index.ipynb)
+
+# 其他事项
+
+如果在浏览器中使用 jupyter lab 卡顿明显，又不舍得禁用插件，可以考虑使用 vscode ！可能很多人不知道，vscode 对 notebook 的支持良好，而且几乎每个版本更新说明都会提到对 notebook 的支持，jupyter lab 的核心插件所提供的例如代码自动补全和 ipynb diff 可视化也可以在 vscode 实现，使用体验也很顺滑。

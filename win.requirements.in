@@ -58,3 +58,4 @@ fastapi
 aiohttp
 Scrapy
 pyecharts
+scikit-learn
