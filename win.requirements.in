@@ -51,6 +51,9 @@ pandasgui
 Pillow
 hiplot
 jieba
+adjustText
+mapclassify
+geopandas
   ## Commonly used packages for network tools
 requests
 beautifulsoup4
